@@ -2,21 +2,21 @@
 
 <head>
     
-    <title>Login</title>
-    <title>Login</title>
-  
-        <style>
+    <title>Register</title>
+    <style>
         .container {
             margin-left: auto;
             margin-right: auto;
             width: 450px;
-            height: 600px;
+            height: 800px;
+
             border-radius: 10px;
             background-color: white;
             margin-top: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             text-align: center;
             font-weight: bold;
+            padding-bottom: 0px;
         }
 
         .first-div {
@@ -98,6 +98,11 @@
             background-color: rgb(12, 85, 94);
             color: rgb(212, 210, 210);
         }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 
@@ -105,19 +110,35 @@
     <div class=container>
         <div class="first-div">
             <h1>IoTBay</h1>
-            <h3>Login</h3>
-            <p>Please login to continue</p>
+            <h3>Register</h3>
+            <p>Fill in the information</p>
         </div>
         <div class="second-div">
 
             <div>
-                <form>
+                <form action="Login.jsp" method="post">
                     <label for="username">Username</label><br>
-                    <input type="text" name="username" placeholder="abd12" minlength="5" maxlength="20" required>
+                    <input type="text" name="username" placeholder="abd12" minlength="5" maxlength="20" required><br>
+
+                    <label for="">Gmail</label><br>
+                    <input type="gmail" name="gmail" placeholder="abc@gmail.com" required><br>
 
                     <label for="password">Password</label><br>
                     <input type="password" name="password" placeholder="ad122@" minlength="8" maxlength="20"
                         required><br>
+
+                    <label for="phone">Contact</label><br>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><br>
+
+                    <label for="Gender"></label><br>
+                    <div><label>Male</label>
+                        <input type="radio" name="gender" value="male"><br>
+                    </div>
+                    <div><label>Female</label>
+                        <input type="radio" name="gender" value="female"> <br>
+                    </div>
+
+
 
                     <input type="submit" value="Continue" style="margin-top: 10px;">
                 </form>
