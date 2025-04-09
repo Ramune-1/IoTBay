@@ -116,11 +116,14 @@
         <div class="second-div">
 
             <div>
-                <form action="Login.jsp" method="post">
+                <form action="welcome.jsp" method="post">
                     <label for="username">Username</label><br>
                     <input type="text" name="username" placeholder="abd12" minlength="5" maxlength="20" required><br>
+                    
+                     <label for="name">Password</label><br>
+                    <input type="text" name="name" placeholder="Lionel Messi"    required><br>
 
-                    <label for="">Gmail</label><br>
+                    <label for="gmail">Gmail</label><br>
                     <input type="gmail" name="gmail" placeholder="abc@gmail.com" required><br>
 
                     <label for="password">Password</label><br>
@@ -128,7 +131,7 @@
                         required><br>
 
                     <label for="phone">Contact</label><br>
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><br>
+                    <input type="tel" id="phone" name="phone" maxlength="8"><br>
 
                     <label for="Gender"></label><br>
                     <div><label>Male</label>

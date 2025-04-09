@@ -73,7 +73,7 @@
         </div>
         <div class="second-div">
             <a href="Login.html">Login</a>
-            <a href="">Register</a>
+            <a href="register.jsp">Register</a>
             <a href="">Guest</a>
 
         </div>
