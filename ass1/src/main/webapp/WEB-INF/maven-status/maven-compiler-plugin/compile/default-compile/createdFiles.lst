@@ -1,2 +1,10 @@
+model\Cart.class
+model\Invoice.class
+model\CartProduct.class
+model\Payment.class
+model\Delivery.class
+model\Payment$PaymentOption.class
+model\Product.class
 model\Customer.class
-model\User.class
+model\StaffAccount.class
+model\Inventory.class

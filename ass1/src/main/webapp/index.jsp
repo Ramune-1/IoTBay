@@ -72,7 +72,7 @@
             <p>Please choose a option to continue</p>
         </div>
         <div class="second-div">
-            <a href="Login.html">Login</a>
+            <a href="login.jsp">Login</a>
             <a href="register.jsp">Register</a>
             <a href="">Guest</a>
 

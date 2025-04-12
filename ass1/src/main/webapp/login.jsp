@@ -111,7 +111,7 @@
         <div class="second-div">
 
             <div>
-                <form>
+                <form action="welcome.jsp" method="post" >
                     <label for="username">Username</label><br>
                     <input type="text" name="username" placeholder="abd12" minlength="5" maxlength="20" required>
 

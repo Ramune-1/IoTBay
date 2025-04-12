@@ -1,4 +1,3 @@
-<%@ page import="model.User"%>
 <%@ page import="model.Customer"%>
 <html>
  <% String username = request.getParameter("username");
@@ -7,20 +6,21 @@
     String password = request.getParameter("password");
     String contact = request.getParameter("phone");
     String gender = request.getParameter("gender");
-    User user = new Customer(username, name, gmail, password,contact,gender);
+    Customer customer = new Customer(username, name, gmail, password,contact,gender);
     
-    session.setAttribute("user", user);
+    session.setAttribute("cus", customer);
 %>
 
 <body>
- <h1>Welcome, <%=user.getName()%></h1>
-<p> Your username <%=user.getUserName()%>
- <br>Your email is <%=user.getGmail()%> 
- <br>Your password is <%=user.getPassWord()%>
- <br>Phone: <%=user.getPhone()%>
- <br>Gender: <%=user.getGender()%>
+ <h1>Welcome, <%=customer.getName()%></h1>
+<p> Your username <%=customer.getUserName()%>
+ <br>Your email is <%=customer.getGmail()%> 
+ <br>Your password is <%=customer.getPassword()%>
+ <br>Phone: <%=customer.getPhone()%>
+ <br>Gender: <%=customer.getGender()%>
  </p>
 
+<h3 style="float: right"> click here to get to main page <a href="main.jsp">Main Page</a></h3>
 
 
 </body></html>
