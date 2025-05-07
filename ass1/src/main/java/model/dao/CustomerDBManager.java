@@ -43,7 +43,7 @@ public class CustomerDBManager {
         if (rs.next()) {
             String customerID = rs.getString("customerID");
             String name = rs.getString("name");
-            String gmail = rs.getString("email");
+            String gmail = rs.getString("gmail");
             String phone = rs.getString("phone");
             String gender = rs.getString("gender");
             return new Customer(customerID, userName, name, gmail, password, phone, gender);
@@ -75,7 +75,7 @@ public class CustomerDBManager {
     }
 
     public boolean checkExistGmail(String gmail) throws SQLException{// this is to check whether the username alreadyc yse or not
-        PreparedStatement ps = conn.prepareStatement("SELECT EMAIL FROM Customer WHERE EMAIL = ?");
+        PreparedStatement ps = conn.prepareStatement("SELECT GMAIL FROM Customer WHERE GMAIL = ?");
 
         ps.setString(1, gmail);
         ResultSet rs = ps.executeQuery();
