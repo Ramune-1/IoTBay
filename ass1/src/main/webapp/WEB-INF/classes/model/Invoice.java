@@ -1,18 +1,23 @@
 package model;
 
+import java.time.LocalDate;
+
+
 public class Invoice {
     private int invoiceID;
-    private Cart cart;
-    private String orderDate;
+    private int cartID;
+    private LocalDate orderDate;
     private double totalPrice;
-    private Customer customer;
+    private int customerID;
 
-    public Invoice(int invoiceID, Cart cart, String orderDate, double totalPrice, Customer customer) {
+
+
+    public Invoice(int invoiceID, int cartID, LocalDate orderDate, double totalPrice, int customerID) {
         this.invoiceID = invoiceID;
-        this.cart = cart;
+        this.cartID = cartID;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
-        this.customer = customer;
+        this.customerID = customerID;
     }
 
     public int getInvoiceID() {
@@ -23,19 +28,19 @@ public class Invoice {
         this.invoiceID = invoiceID;
     }
 
-    public Cart getCart() {
-        return this.cart;
+    public int getCartID() {
+        return this.cartID;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setCartID(int cartID) {
+        this.cartID = cartID;
     }
 
-    public String getOrderDate() {
+    public LocalDate getOrderDate() {
         return this.orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -47,12 +52,14 @@ public class Invoice {
         this.totalPrice = totalPrice;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public int getCustomerID() {
+        return this.customerID;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
+
+ 
 
 }

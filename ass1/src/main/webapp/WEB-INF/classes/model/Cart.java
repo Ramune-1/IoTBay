@@ -1,23 +1,20 @@
 package model;
-import java.util.Objects;
+
 
 public class Cart {
     private int cartID;
-    private Customer customer;
-    private Payment payment;
-    private Delivery delivery;
+    private int customerID;
+    private int paymentID;
+    private int deliveryID;
     private double totalPrice;
 
 
 
-    public Cart() {
-    }
-
-    public Cart(int cartID, Customer customer, Payment payment, Delivery delivery, double totalPrice) {
+    public Cart(int cartID, int customerID, int paymentID, int deliveryID, double totalPrice) {
         this.cartID = cartID;
-        this.customer = customer;
-        this.payment = payment;
-        this.delivery = delivery;
+        this.customerID = customerID;
+        this.paymentID = paymentID;
+        this.deliveryID = deliveryID;
         this.totalPrice = totalPrice;
     }
 
@@ -30,28 +27,28 @@ public class Cart {
         this.cartID = cartID;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public int getCustomerID() {
+        return this.customerID;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
-    public Payment getPayment() {
-        return this.payment;
+    public int getPaymentID() {
+        return this.paymentID;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setPaymentID(int paymentID) {
+        this.paymentID = paymentID;
     }
 
-    public Delivery getDelivery() {
-        return this.delivery;
+    public int getDeliveryID() {
+        return this.deliveryID;
     }
 
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
+    public void setDeliveryID(int deliveryID) {
+        this.deliveryID = deliveryID;
     }
 
     public double getTotalPrice() {
@@ -61,7 +58,7 @@ public class Cart {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
-
+  
   
  
 }

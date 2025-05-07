@@ -125,7 +125,7 @@
             <div class="option">
                 <div class="left"><a href="">Forgot password?</a></div>
                 <div class="right">
-                    <a href="">Return</a>
+                    <a href="index.jsp">Return</a>
 
                 </div>
             </div>

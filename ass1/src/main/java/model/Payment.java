@@ -1,21 +1,21 @@
 package model;
 
-
+import java.time.LocalDate;
 
 public class Payment {
     enum PaymentOption{
         PAYPAL, CREDITCARD, APPLEPAY;}
     private int paymentID;
-    private Customer customer;
+    private int customerID;
     private PaymentOption paymentOption;
-    private String date;
+    private LocalDate date;
     private double amount;
 
 
 
-    public Payment(int paymentID, Customer customer, PaymentOption paymentOption, String date, double amount) {
+    public Payment(int paymentID, int customerID, PaymentOption paymentOption, LocalDate date, double amount) {
         this.paymentID = paymentID;
-        this.customer = customer;
+        this.customerID = customerID;
         this.paymentOption = paymentOption;
         this.date = date;
         this.amount = amount;
@@ -29,12 +29,12 @@ public class Payment {
         this.paymentID = paymentID;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public int getCustomer() {
+        return this.customerID;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer(int customerID) {
+        this.customerID = customerID;
     }
 
     public PaymentOption getPaymentOption() {
@@ -45,11 +45,11 @@ public class Payment {
         this.paymentOption = paymentOption;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

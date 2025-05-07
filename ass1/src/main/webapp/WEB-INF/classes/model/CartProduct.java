@@ -1,35 +1,38 @@
 package model;
 
+
 public class CartProduct {
-    private Cart cart;
-    private Product product;
+    private int cartId;
+    private int productID;
     private int quantity;
     private double unitPrice;
     private double totalPrice;
 
 
-    public CartProduct(Cart cart, Product product, int quantity, double unitPrice, double totalPrice) {
-        this.cart = cart;
-        this.product = product;
+  
+
+    public CartProduct(int cartId, int productID, int quantity, double unitPrice, double totalPrice) {
+        this.cartId = cartId;
+        this.productID = productID;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;
     }
 
-    public Cart getCart() {
-        return this.cart;
+    public int getCartId() {
+        return this.cartId;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
-    public Product getProduct() {
-        return this.product;
+    public int getProductID() {
+        return this.productID;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public int getQuantity() {
@@ -55,5 +58,7 @@ public class CartProduct {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+ 
 
 }
