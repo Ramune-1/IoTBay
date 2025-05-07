@@ -114,24 +114,30 @@
             <p>Fill in the information</p>
         </div>
         <div class="second-div">
-
+                    <%
+            String errorMsg = (String) session.getAttribute("errorMsg");// delete after fix
+            if (errorMsg != null){
+            %>
+            <div style="color:red"><%=errorMsg %></div>
+            <% session.removeAttribute("errorMsg");
+            }%>
             <div>
-                <form action="welcome.jsp" method="post">
-                    <label for="username">Username</label><br>
-                    <input type="text" name="username" placeholder="abd12" minlength="5" maxlength="20" required><br>
+                <form action="RegisterServlet" method="post">
                     
-                     <label for="name">Password</label><br>
-                    <input type="text" name="name" placeholder="Lionel Messi"    required><br>
+                    <label for="username">Username</label><br>
+                    <input type="text" name="username" placeholder="omghaha"><br>
+                    
+                     <label for="name">Your name</label><br>
+                    <input type="text" name="name" placeholder="Lionel Messi"    ><br>
 
                     <label for="gmail">Gmail</label><br>
-                    <input type="gmail" name="gmail" placeholder="abc@gmail.com" required><br>
+                    <input type="gmail" name="gmail" placeholder="abc@gmail.com" ><br>
 
                     <label for="password">Password</label><br>
-                    <input type="password" name="password" placeholder="ad122@" minlength="8" maxlength="20"
-                        required><br>
+                    <input type="password" name="password" placeholder="ad122@" ><br>
 
                     <label for="phone">Contact</label><br>
-                    <input type="tel" id="phone" name="phone" maxlength="8"><br>
+                    <input type="tel" id="phone" name="phone"><br>
 
                     <label for="Gender"></label><br>
                     <div><label>Male</label>

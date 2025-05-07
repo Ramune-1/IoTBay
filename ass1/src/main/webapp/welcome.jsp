@@ -1,4 +1,5 @@
 <%@ page import="model.Customer"%>
+<% Customer customer = (Customer) session.getAttribute("customer");%>
 <html>
  <% String username = request.getParameter("username");
     String name = request.getParameter("name");

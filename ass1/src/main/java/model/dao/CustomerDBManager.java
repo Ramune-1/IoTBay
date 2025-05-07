@@ -84,6 +84,18 @@ public class CustomerDBManager {
       }
       return false;
     }
+
+    public boolean checkExistPhone(String phone) throws SQLException{// this is to check whether the username alreadyc yse or not
+        PreparedStatement ps = conn.prepareStatement("SELECT PHONE FROM Customer WHERE PHONE = ?");
+
+        ps.setString(1, phone);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return true;
+      }
+      return false;
+    }
+
 }
 
    

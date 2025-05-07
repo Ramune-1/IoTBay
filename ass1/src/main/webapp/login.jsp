@@ -109,15 +109,18 @@
             <p>Please login to continue</p>
         </div>
         <div class="second-div">
+<% String msg = (String) session.getAttribute("errorMsg");%>
 
+<% if (msg != null) { %>
+<p style="color: red"><%= msg%></p>
+<% } %>
             <div>
-                <form action="welcome.jsp" method="post" >
+                <form action="LoginServlet" method="post" >
                     <label for="username">Username</label><br>
-                    <input type="text" name="username" placeholder="abd12" minlength="5" maxlength="20" required>
+                    <input type="text" name="username" placeholder="abd12" >
 
                     <label for="password">Password</label><br>
-                    <input type="password" name="password" placeholder="ad122@" minlength="8" maxlength="20"
-                        required><br>
+                    <input type="password" name="password" placeholder="ad122"><br>
 
                     <input type="submit" value="Continue" style="margin-top: 10px;">
                 </form>
