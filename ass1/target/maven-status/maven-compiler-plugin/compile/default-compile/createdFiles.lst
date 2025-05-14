@@ -1,4 +1,5 @@
 controller\LoginServlet.class
+model\dao\CustomerAccessLogDBManager.class
 model\Cart.class
 controller\ConnServlet.class
 model\dao\DB.class
@@ -8,10 +9,11 @@ model\Invoice.class
 model\CartProduct.class
 model\Payment.class
 model\Delivery.class
+model\CustomerLog.class
 controller\utility\Validator.class
+model\dao\StaffDBManager.class
 model\Payment$PaymentOption.class
 model\Product.class
-model\dao\DBManager.class
 model\Delivery$Status.class
 controller\RegisterServlet.class
 model\Customer.class

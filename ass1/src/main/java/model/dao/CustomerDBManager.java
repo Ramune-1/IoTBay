@@ -23,7 +23,7 @@ public class CustomerDBManager {
     } 
 
 
-        public void updateCustomer(String customerID, String userName, String name, String gmail, String passWord, String phone, String gender) throws SQLException {
+    public void updateCustomer(String customerID, String userName, String name, String gmail, String passWord, String phone, String gender) throws SQLException {
             PreparedStatement ps = conn.prepareStatement("UPDATE Customer SET userName = ?, name = ?, gmail = ?, passWord = ?, phone = ?, gender = ? WHERE customerID = ?");
             ps.setString(1, userName);
             ps.setString(2, name);
@@ -35,7 +35,7 @@ public class CustomerDBManager {
             ps.executeUpdate();
         }
 
-    public Customer findCustomer(String userName, String password) throws SQLException{
+   public Customer findCustomer(String userName, String password) throws SQLException{
         PreparedStatement ps = conn.prepareStatement("SELECT * FROM Customer WHERE userName = ? AND password = ?");
         ps.setString(1, userName);
         ps.setString(2, password);
@@ -94,6 +94,10 @@ public class CustomerDBManager {
             return true;
       }
       return false;
+    }
+
+    public void updatePassword(){
+        
     }
 
 }

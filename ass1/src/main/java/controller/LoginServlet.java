@@ -21,6 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.Customer;
+import model.dao.CustomerAccessLogDBManager;
 import model.dao.CustomerDBManager;
 
 @WebServlet("/LoginServlet")
@@ -33,6 +34,7 @@ public class LoginServlet extends HttpServlet{
         String userName = request.getParameter("username");
         String passWord = request.getParameter("password");
         CustomerDBManager customerManager = (CustomerDBManager) session.getAttribute("customerManager");// manager is from ConnServlet
+        CustomerAccessLogDBManager customerAccessLogManager = (CustomerAccessLogDBManager) session.getAttribute("customerAccessLogManager");
         if (customerManager == null) throw new IOException("Manager not found");
         Customer customer = null;// create customer instance
         try {
@@ -47,6 +49,14 @@ public class LoginServlet extends HttpServlet{
             session.setAttribute("errorMsg", "Your password input not valid");//RegEX
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else if (customer != null){
+            try {
+                if (customerAccessLogManager.findCustomerLog(userName) == true) {
+                    customerAccessLogManager.updateCustomerLogin(userName);
+                }else if (customerAccessLogManager.findCustomerLog(userName) == false){
+                    customerAccessLogManager.addLog(customer.getCustomerID(), userName);
+                }
+            } catch (Exception ex) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);            }
             session.setAttribute("customer", customer);// if customer find set session for customer
             request.getRequestDispatcher("welcome.jsp").include(request, response);
         }else {
