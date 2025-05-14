@@ -1,41 +1,50 @@
 package model;
+
 public class StaffAccount {
+    private String staffID;
     private String userName;
-    private int staffID;
+    private String name;
     private String gender;
     private String email;
     private String password;
     private String phone;
 
-   
-    public StaffAccount(String userName, int staffID, String gender, String email, String password, String phone) {
-        this.userName = userName;
+    public StaffAccount(String staffID, String userName, String name, String email, String password, String phone, String gender) {
         this.staffID = staffID;
+        this.userName = userName;
+        this.name = name;
         this.gender = gender;
         this.email = email;
         this.password = password;
         this.phone = phone;
     }
 
-    // Getters and Setters
+    public String getStaffID() {
+        return this.staffID;
+    }
+
+    public void setStaffID(String staffID) {
+        this.staffID = staffID;
+    }
+
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public int getStaffID() {
-        return staffID;
+    public String getName() {
+        return this.name;
     }
 
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGender() {
-        return gender;
+        return this.gender;
     }
 
     public void setGender(String gender) {
@@ -43,7 +52,7 @@ public class StaffAccount {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -51,7 +60,7 @@ public class StaffAccount {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -59,7 +68,7 @@ public class StaffAccount {
     }
 
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {

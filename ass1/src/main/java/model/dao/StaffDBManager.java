@@ -2,6 +2,8 @@ package model.dao;
 
 import model.StaffAccount;
 import java.sql.*;
+
+
 public class StaffDBManager {
     private Connection conn;
     
@@ -27,6 +29,20 @@ public class StaffDBManager {
         ps.executeUpdate();
     }
 
-
+    public StaffAccount findStaff(String username, String password) throws SQLException{
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Staff WHERE USERNAME = ? AND PASSWORD = ?");
+        ps.setString(1, username);
+        ps.setString(2, password);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            String id = rs.getString("staffID");
+            String name = rs.getString("name");
+            String gmail = rs.getString("gmail");
+            String phone = rs.getString("phone");
+            String gender = rs.getString("gender");
+            return new StaffAccount(id, username, name, gmail, password, phone, gender);
+        }
+        return null;
+    }
 
 }
