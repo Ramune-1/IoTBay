@@ -1,7 +1,7 @@
 package model;
-import java.time.LocalDate;
+
 import java.sql.Time;
-import java.sql.Timestamp;
+
 
 public class Order {
     private int orderID;
