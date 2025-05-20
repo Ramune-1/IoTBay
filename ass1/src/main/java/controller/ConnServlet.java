@@ -23,8 +23,8 @@ package controller;
    import jakarta.servlet.http.HttpServletResponse;
 
    import jakarta.servlet.http.HttpSession;
-
-   import model.dao.*;
+import model.Order;
+import model.dao.*;
 
  
     @WebServlet("/ConnServlet")
@@ -75,8 +75,10 @@ package controller;
               conn = db.openConnection();
               CustomerDBManager customerManager = new CustomerDBManager(conn);
               CustomerAccessLogDBManager customerAccessLogDBManager = new CustomerAccessLogDBManager(conn);
+              OrderDBManager orderManager = new OrderDBManager(conn);
               session.setAttribute("customerManager", customerManager);
               session.setAttribute("customerAccessLogManager", customerAccessLogDBManager);
+              session.setAttribute("orderManager", orderManager);
            } catch (SQLException ex) {
 
                Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
