@@ -1,87 +1,69 @@
 
-
+<html lang="en">
 <head>
-    
-    <title>Login</title>
-    <title>Login</title>
-  
-        <style>
-        .container {
-            margin-left: auto;
-            margin-right: auto;
-            width: 450px;
-            height: 600px;
-            border-radius: 10px;
-            background-color: white;
-            margin-top: 50px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            text-align: center;
-            font-weight: bold;
-        }
 
-        .first-div {
-            height: 30%;
-            width: auto;
-            padding: 40px 40px 24px;
-
-        }
-
-        h1 {
-            color: navy;
-
-        }
-
-        h3 {
-            margin-top: 30px;
-            margin-bottom: 0;
-        }
-
-        .first-div p {
-            margin-top: 50px;
-            margin-bottom: 0;
-            color: grey;
-        }
-
-        .second-div {
-            display: flex;
-            flex-direction: column;
-            height: auto;
-            width: 300px;
-            margin-right: auto;
-            margin-left: auto;
-
-        }
-
-        input {
-            width: 300px;
+    <title>Iotbay Login</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            border-color: rgb(82, 80, 80);
+        }
+        .body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgb(17, 125, 139);
+            font-family: Arial, Helvetica, sans-serif;
+            flex-direction: column;
+        }
+        .header{
+            height: 60px;
+            background-color: white;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 70px;
+            font-family: Arial, Helvetica, sans-serif ;
+        }
+        .logo{
+            font-size: 30px;
+            font-weight: bolder;
+            color: rgb(17, 125, 139) ;
+        }
+        .topic{
+            font-size: 25px;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        .container{
+            position: relative;
+            background-color: white;
+            width: 350px;
+            height: 400px;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        .login-title{
+            color: rgb(12, 85, 94);
+            font-weight: bolder;
+            position: absolute;
+            top: 15px;
+            left: 27px;
+        }
+        input[type="text"], input[type="password"]{
+            width: 300px;
             height: 40px;
             border-radius: 10px;
             padding-left: 10px;
             margin-bottom: 10px;
-
         }
-
-        label {
-            float: left;
-        }
-
-
-        .option {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-
-        }
-
-        a {
-
-            text-decoration: none;
-            color: rgb(17, 125, 139);
-
-        }
-
         input[type="submit"] {
             background-color: rgb(17, 125, 139);
             color: white;
@@ -91,51 +73,60 @@
             cursor: pointer;
             text-align: center;
             text-decoration: none;
+            width: 300px;
         }
-
         input[type="submit"]:hover {
-
             background-color: rgb(12, 85, 94);
             color: rgb(212, 210, 210);
         }
+        .option {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 300px;
+        }
+        a {
+            text-decoration: none;
+            color: rgb(17, 125, 139);
+        }
+        .error{
+            color: red;
+            align-self: flex-start;
+            margin-left: 25px;
+        }
     </style>
 </head>
-
-<body style="background-color: rgb(227, 227, 227);">
-    <div class=container>
-        <div class="first-div">
-            <h1>IoTBay</h1>
-            <h3>Login</h3>
-            <p>Please login to continue</p>
-        </div>
-        <div class="second-div">
-<% String msg = (String) session.getAttribute("errorMsg");%>
-
-<% if (msg != null) { %>
-<p style="color: red"><%= msg%></p>
-<% } %>
-            <div>
-                <form action="LoginServlet" method="post" >
+<body>
+    <div class="header">
+        <div class="logo">Iotbay</div>
+        <div class="topic">Login</div>
+    </div>
+    <div class="body">
+        <div class="container">
+            <form action="LoginServlet" method="post">
+                <div class="login-title"><h2>Login</h2></div>
+                <% String msg = (String) session.getAttribute("errorMsg"); %>
+                <% if (msg != null) { %>
+                    <div class="error"><%= msg %></div>
+                <% } %>
+                <div style="margin-top: 60px;">
                     <label for="username">Username</label><br>
-                    <input type="text" name="username" placeholder="abd12" >
-
-                    <label for="password">Password</label><br>
-                    <input type="password" name="password" placeholder="ad122"><br>
-
-                    <input type="submit" value="Continue" style="margin-top: 10px;">
-                </form>
-            </div>
-            <div class="option">
-                <div class="left"><a href="">Forgot password?</a></div>
-                <div class="right">
-                    <a href="index.jsp">Return</a>
-
+                    <input type="text" name="username" placeholder="Lionel Messi"><br>
                 </div>
-            </div>
-
+                <div>
+                    <label for="password">Password</label><br>
+                    <input type="password" name="password" placeholder="abc123"><br>
+                </div>
+                <div>
+                    <input type="submit" value="Continue" style="margin-top: 10px;">
+                </div>
+                <div class="option">
+                    <div><a href="index.jsp">Return</a></div>
+                    <div><a href="register.jsp">Register</a></div>
+                </div>
+            </form>
         </div>
-
     </div>
 </body>
-
 </html>
