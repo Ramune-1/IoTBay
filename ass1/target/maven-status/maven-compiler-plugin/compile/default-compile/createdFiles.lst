@@ -7,6 +7,7 @@ model/Delivery.class
 model/Inventory.class
 model/dao/ProductDBManager.class
 controller/ConnServlet.class
+controller/ProductServlet.class
 model/Cart.class
 model/StaffAccount.class
 model/Customer.class

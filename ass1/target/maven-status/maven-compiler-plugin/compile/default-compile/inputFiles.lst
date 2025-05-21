@@ -20,6 +20,7 @@
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/dao/CustomerAccessLogDBManager.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/controller/LogoutServlet.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/dao/ProductDBManager.java
+/Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/controller/ProductServlet.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/controller/LoginServlet.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/dao/DB.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/Cart.java

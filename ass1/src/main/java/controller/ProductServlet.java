@@ -18,9 +18,8 @@ public class ProductServlet extends HttpServlet {
         ProductDBManager productManager = (ProductDBManager) session.getAttribute("productManager");
         try {
             List<Product> products = productManager.getAllProducts();
-            request.setAttribute("products", products);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("productList.jsp");
-            dispatcher.forward(request, response);
+            session.setAttribute("products", products);
+            request.getRequestDispatcher("productList.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp");
