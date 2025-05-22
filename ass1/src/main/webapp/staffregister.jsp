@@ -140,11 +140,11 @@
     <div class="header">
         <div class="left"><div class="logo">Iotbay</div>
         <div class="topic">Register</div></div>
-        <div class="right"><a href="">Register as a staff</a></div>
+        <div class="right"><a href="register.jsp">Register as a customer</a></div>
     </div>
     <div class="body"> <div class="container">
         <form action="StaffRegisterServlet" method="post"></form>
-        <div class="register"><h2>Register</h2></div>
+        <div class="register"><h2>Staff Register</h2></div>
         <div class="error">this username exist</div>
         <div>
             <label for="username">Username</label><br>
@@ -180,8 +180,8 @@
             <input type="submit" value="Register" style="margin-top: 10px;">
         </div>
         <div class="option">
-            <div><a href="">Return</a></div>
-        <div><a href="">Login</a></div></div></div>
+            <div><a href="index.jsp">Return</a></div>
+        <div><a href="login.jsp">Login</a></div></div></div>
    
 </body>
 </html>
