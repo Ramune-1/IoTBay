@@ -23,7 +23,7 @@ public class AddToCartServlet extends HttpServlet {
         @SuppressWarnings("unchecked")
         List<Product> products = (List<Product>) session.getAttribute("products");
         if (products == null) {
-            response.sendRedirect("product.jsp"); 
+            response.sendRedirect("product.jsp"); // or an error page
             return;
         }
 
@@ -59,6 +59,6 @@ public class AddToCartServlet extends HttpServlet {
         }
 
         session.setAttribute("cart", cart);
-        response.sendRedirect("viewCart.jsp"); 
+        response.sendRedirect("viewCart.jsp"); // Redirect to the cart page
     }
 }

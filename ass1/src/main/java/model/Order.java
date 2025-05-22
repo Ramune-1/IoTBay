@@ -5,13 +5,13 @@ import java.sql.Time;
 
 public class Order {
     private int orderID;
-    private int customerID;
+    private String customerID;
     private int paymentID;
     private int deliveryID;
     private double totalPrice;
     private Time orderDate;
     
-    public Order(int orderID, int customerID, int paymentID, int deliveryID, double totalPrice, Time orderDate) {
+    public Order(int orderID, String customerID, int paymentID, int deliveryID, double totalPrice, Time orderDate) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.paymentID = paymentID;
@@ -26,10 +26,10 @@ public class Order {
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
-    public int getCustomerID() {
+    public String getCustomerID() {
         return this.customerID;
     }
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
     public int getPaymentID() {

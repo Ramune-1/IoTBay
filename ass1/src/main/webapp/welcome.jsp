@@ -13,6 +13,8 @@
  </p>
 
 <h3 style="float: right"> click here to get to main page <a href="main.jsp">Main Page</a></h3>
-
+<form action="ProductServlet" method="get">
+    <button type="submit">View our catalogue of IOT Devices!</button>
+</form>
 
 </body></html>

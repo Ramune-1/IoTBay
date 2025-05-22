@@ -66,6 +66,10 @@
     </table>
     <br>
     <a href="checkout.jsp">Proceed to Checkout</a>
+    
+    <form method="post" action="SaveOrderServlet">
+    <button type="submit">Save Order</button>
+    </form>
 <%
     }
 %>

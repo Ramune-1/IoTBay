@@ -1,6 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Product" %>
+<%@ page import="model.Customer" %>
+<%
+    Customer customer = (Customer) session.getAttribute("customer");
+    if (customer == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+    List<Product> products = (List<Product>) session.getAttribute("products");
+    if (products == null) {
+        response.sendRedirect("index.jsp");
+        return;
+    }
+%>
+
+   
 
 <html>
 <head>
@@ -25,9 +40,9 @@
 <div class="container">
     <h1>Available Products</h1>
 <%
-    List<Product> products = (List<Product>) session.getAttribute("products");
+    
 
-    if (products == null || products.isEmpty()) {
+    if (products.isEmpty()) {
 %>
     <p>No products available.</p>
 <%
