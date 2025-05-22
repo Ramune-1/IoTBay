@@ -94,8 +94,7 @@ public class RegisterServlet extends HttpServlet{
             session.setAttribute("errorMsg", "password in valid");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else if (customer != null){
-            session.setAttribute("customer", customer);
-            request.getRequestDispatcher("welcome.jsp").include(request, response);
+            request.getRequestDispatcher("login.jsp").include(request, response);
         } else if (customer == null){
             session.setAttribute("errorMsg", "IT's error");
             request.getRequestDispatcher("register.jsp").include(request, response);
