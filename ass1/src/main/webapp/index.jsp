@@ -63,7 +63,7 @@
         }
     </style>
 </head>
-<jsp:include page="/ConnServlet" flush="true"/>
+
 <body style="background-color: rgb(227, 227, 227);">
     <div class=container>
         <div class="first-div">
@@ -79,6 +79,7 @@
         </div>
 
     </div>
+<jsp:include page="/ConnServlet" flush="true"/>
 </body>
 
 </html>
