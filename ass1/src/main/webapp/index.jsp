@@ -84,15 +84,6 @@
         }
     </style>
 </head>
-<<<<<<< HEAD
-
-<body style="background-color: rgb(227, 227, 227);">
-    <div class=container>
-        <div class="first-div">
-            <h1>IoTBay</h1>
-            <h3>Welcome to our IoTBay</h3>
-            <p>Please choose a option to continue</p>
-=======
 <jsp:include page="/ConnServlet" flush="true"/>
 <body>
     <div class="header">
@@ -110,7 +101,7 @@
                 <a href="register.jsp">Register</a>
                 <a href="">Guest</a>
             </div>
->>>>>>> 52b889b (fix the first view)
+
         </div>
     </div>
 <jsp:include page="/ConnServlet" flush="true"/>
