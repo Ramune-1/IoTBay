@@ -76,9 +76,12 @@ import model.dao.*;
               CustomerDBManager customerManager = new CustomerDBManager(conn);
               CustomerAccessLogDBManager customerAccessLogDBManager = new CustomerAccessLogDBManager(conn);
               OrderDBManager orderManager = new OrderDBManager(conn);
+                ProductDBManager productManager = new ProductDBManager(conn);
               session.setAttribute("customerManager", customerManager);
               session.setAttribute("customerAccessLogManager", customerAccessLogDBManager);
               session.setAttribute("orderManager", orderManager);
+              session.setAttribute("productManager", productManager);
+              
            } catch (SQLException ex) {
 
                Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
