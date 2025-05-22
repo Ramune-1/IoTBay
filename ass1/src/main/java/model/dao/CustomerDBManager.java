@@ -35,6 +35,8 @@ public class CustomerDBManager {
             ps.executeUpdate();
         }
 
+    
+
    public Customer findCustomer(String userName, String password) throws SQLException{
         PreparedStatement ps = conn.prepareStatement("SELECT * FROM Customer WHERE userName = ? AND password = ?");
         ps.setString(1, userName);
