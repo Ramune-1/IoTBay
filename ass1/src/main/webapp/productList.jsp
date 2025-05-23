@@ -14,69 +14,48 @@
         return;
     }
 %>
-
-   
-
 <html>
 <head>
     <title>Product List</title>
-    <style>
-        .container {
-            width: 80%;
-            margin: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 16px;
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ccc;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-<div class="container">
-    <h1>Available Products</h1>
-<%
-    
+    <div class="header">
+        <div class="logo">Iotbay</div>
+        <div class="topic">Product List</div>
+    </div>
 
-    if (products.isEmpty()) {
-%>
-    <p>No products available.</p>
-<%
-    } else {
-%>
-    <form method="post" action="AddToCartServlet">
-    <table>
-        <tr>
-            <th>Product Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-        </tr>
-        <%
-            for (Product product : products) {
-        %>
-        <tr>
-            <td><%= product.getName() %></td>
-            <td><%= product.getDescription() %></td>
-            <td><%= product.getPrice() %></td>
-            <td>
-                <input type="number" name="quantity_<%= product.getProductID() %>" min="0" value="0">
-            </td>
-        </tr>
-        <%
-            }
-        %>
-    </table>
-    <br>
-    <button type="submit">Proceed</button>
-    </form>
-<%
-    }
-%>
-</div>
+    <div class="body">
+        <div class="container">
+            <h1>Available Products</h1>
+
+            <% if (products.isEmpty()) { %>
+                <p>No products available.</p>
+            <% } else { %>
+                <form method="post" action="AddToCartServlet">
+                    <table>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                        <% for (Product product : products) { %>
+                            <tr>
+                                <td><%= product.getName() %></td>
+                                <td><%= product.getDescription() %></td>
+                                <td>$<%= String.format("%.2f", product.getPrice()) %></td>
+                                <td>
+                                    <input type="number" name="quantity_<%= product.getProductID() %>" min="0" value="0" style="width: 60px; padding: 6px;">
+                                </td>
+                            </tr>
+                        <% } %>
+                    </table>
+                    <br>
+                    <button type="submit" style="margin-top: 10px;">Proceed</button>
+                </form>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>
