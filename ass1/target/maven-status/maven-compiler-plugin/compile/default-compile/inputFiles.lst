@@ -8,11 +8,11 @@
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/dao/DBConnector.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/dao/CustomerDBManager.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/CartProduct.java
-/Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/controller/CheckoutServlet.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/controller/utility/Validator.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/Delivery.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/Payment.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/controller/ConnServlet.java
+/Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/controller/CustomerOrderListServlet.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/CustomerLog.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/controller/RegisterServlet.java
 /Users/suqqie/IoTBay/IoTBay/ass1/src/main/java/model/Inventory.java

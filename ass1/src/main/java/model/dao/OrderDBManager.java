@@ -64,13 +64,27 @@ public class OrderDBManager {
     }
 
     public List<Order> searchOrders(String customerID, String orderNumber, String date) throws SQLException {
-        String query = "SELECT * FROM Orders WHERE customerID = ? AND orderID LIKE ? AND orderDate LIKE ?";
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, customerID);
-        ps.setString(2, "%" + orderNumber + "%");
-        ps.setString(3, "%" + date + "%");
-        ResultSet rs = ps.executeQuery();
+        StringBuilder query = new StringBuilder("SELECT * FROM Orders WHERE customerID = ?");
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(customerID);
 
+        if (orderNumber != null && !orderNumber.trim().isEmpty()) {
+        query.append(" AND orderID = ?");
+        parameters.add(Integer.parseInt(orderNumber.trim()));
+        }
+
+        if (date != null && !date.trim().isEmpty()) {
+        query.append(" AND DATE(orderDate) = ?");
+        parameters.add(date.trim());  // Expected format: "yyyy-MM-dd"
+        }
+
+        PreparedStatement ps = conn.prepareStatement(query.toString());
+
+        for (int i = 0; i < parameters.size(); i++) {
+            ps.setObject(i + 1, parameters.get(i));
+        }
+
+        ResultSet rs = ps.executeQuery();
         List<Order> orders = new ArrayList<>();
         while (rs.next()) {
             orders.add(new Order(
@@ -83,6 +97,9 @@ public class OrderDBManager {
             ));
         }
         return orders;
-    }
+
+        
     
+}
+
 }

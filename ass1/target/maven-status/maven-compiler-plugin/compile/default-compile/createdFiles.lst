@@ -23,6 +23,7 @@ controller/RegisterServlet.class
 controller/SaveOrderServlet.class
 controller/OrderServlet.class
 model/dao/CustomerDBManager.class
+controller/CustomerOrderListServlet.class
 model/CartProduct.class
 model/dao/DB.class
 controller/CartServlet.class

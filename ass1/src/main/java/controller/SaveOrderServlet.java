@@ -1,9 +1,7 @@
 package controller;
-import controller.utility.Validator;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -61,7 +59,7 @@ public class SaveOrderServlet extends HttpServlet {
 
             session.removeAttribute("cart");
             session.setAttribute("lastOrderID", orderID);
-            response.sendRedirect("orderConfirmation.jsp");
+            response.sendRedirect("CustomerOrderListServlet");
 
         } catch (SQLException e) {
             throw new ServletException("Order saving failed", e);
