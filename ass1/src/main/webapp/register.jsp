@@ -1,4 +1,8 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iotbay register</title>
     <style>
         *{
@@ -20,10 +24,23 @@
             background-color: white;
             width: 100%;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             padding-left: 70px;
             font-family: Arial, Helvetica, sans-serif ;
+        }
+        .left{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .right{
+            margin-right: 50px;
+            color:  rgb(17, 125, 139);
+            font-weight: bold;
+        }
+        .right a:hover{
+            color:  rgb(10, 67, 75);
         }
         .logo{
             font-size: 30px;
@@ -39,7 +56,7 @@
             position: relative;
             background-color: white;
             width: 350px;
-            height: 600px;
+            height: 550px;
             justify-content: center;
             display: flex;
             align-items: center;
@@ -112,21 +129,18 @@
 </head>
 <body>
     <div class="header">
-        <div class="logo">Iotbay</div>
-        <div class="topic">Register</div>
+        <div class="left">
+            <div class="logo">Iotbay</div>
+            <div class="topic">Register</div>
+        </div>
+        <div class="right">
+            <a href="staff_register.jsp">Register as a staff</a>
+        </div>
     </div>
     <div class="body">
         <div class="container">
             <div class="register"><h2>Register</h2></div>
-            <% 
-                String errorMsg = (String) session.getAttribute("errorMsg");
-                if (errorMsg != null) {
-            %>
-                <div class="error"><%= errorMsg %></div>
-            <%
-                    session.removeAttribute("errorMsg");
-                }
-            %>
+            <div class="error">this username exist</div>
             <form action="RegisterServlet" method="post" style="width:100%;display:flex;flex-direction:column;align-items:center;">
                 <div>
                     <label for="username">Username</label><br>
