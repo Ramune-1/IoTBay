@@ -1,6 +1,7 @@
 package controller;
 import controller.utility.Validator;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
@@ -24,7 +25,7 @@ public class SaveOrderServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
-        Customer customer = (Customer) session.getAttribute("user");
+        Customer customer = (Customer) session.getAttribute("customer");
         OrderDBManager orderManager = (OrderDBManager) session.getAttribute("orderManager");
 
         if (cart == null || cart.isEmpty() || customer == null) {
@@ -38,7 +39,7 @@ public class SaveOrderServlet extends HttpServlet {
         }
 
         try {
-            Time now = new Time(System.currentTimeMillis());
+            Timestamp now = new Timestamp(System.currentTimeMillis());
 
             // TEMP placeholders 
             int placeholderPaymentID = 0;
@@ -51,6 +52,12 @@ public class SaveOrderServlet extends HttpServlet {
                 total,
                 now
             );
+
+            System.out.println("CustomerID: " + customer.getCustomerID());
+            System.out.println("Total price: " + total);
+            System.out.println("OrderDate: " + now);
+            System.out.println("Cart size: " + cart.size());
+            System.out.println("Order saved with ID: " + orderID);
 
             session.removeAttribute("cart");
             session.setAttribute("lastOrderID", orderID);

@@ -1,6 +1,14 @@
 <%@ page import="model.CartItem" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Product" %>
+<%@ page import="model.Customer" %>
+<%
+    Customer customer = (Customer) session.getAttribute("customer"); // or "customer" depending on your session
+    if (customer == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 
 <html>
 <head>
@@ -67,6 +75,7 @@
     <br>
     <a href="checkout.jsp">Proceed to Checkout</a>
     
+    <p>Would you like to save your order? <%= customer.getUserName() %></p>
     <form method="post" action="SaveOrderServlet">
     <button type="submit">Save Order</button>
     </form>

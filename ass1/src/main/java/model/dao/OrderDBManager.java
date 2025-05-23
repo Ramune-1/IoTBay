@@ -2,8 +2,10 @@ package model.dao;
 
 import model.Order;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class OrderDBManager {
     private Connection conn;
@@ -12,14 +14,14 @@ public class OrderDBManager {
         this.conn = conn;
     }
 
-    public int addOrder(String customerID, int paymentID, int deliveryID, double totalPrice, Time orderDate) throws SQLException{
-        String query = "INSERT INTO `Order` (customerID, paymentID, deliveryID, totalPrice, orderDate) VALUES (?, ?, ?, ?, ?)";
+    public int addOrder(String customerID, int paymentID, int deliveryID, double totalPrice, Timestamp orderDate) throws SQLException{
+        String query = "INSERT INTO `Orders` (customerID, totalPrice, orderDate) VALUES (?, ?, ?)";
         PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         stmt.setString(1, customerID);
-        stmt.setInt(2, paymentID);
-        stmt.setInt(3, deliveryID);
-        stmt.setDouble(4, totalPrice);
-        stmt.setTime(5, orderDate);
+        // stmt.setInt(2, paymentID);
+        // stmt.setInt(3, deliveryID);
+        stmt.setDouble(2, totalPrice);
+        stmt.setString(3, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(orderDate));
         stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
 
@@ -55,7 +57,7 @@ public class OrderDBManager {
                 rs.getInt("paymentID"),
                 rs.getInt("deliveryID"),
                 rs.getDouble("totalPrice"),
-                rs.getTime("orderDate")
+                rs.getTimestamp("orderDate")
             ));
         }
         return orders;
@@ -77,7 +79,7 @@ public class OrderDBManager {
                 rs.getInt("paymentID"),
                 rs.getInt("deliveryID"),
                 rs.getDouble("totalPrice"),
-                rs.getTime("orderDate")
+                rs.getTimestamp("orderDate")
             ));
         }
         return orders;
