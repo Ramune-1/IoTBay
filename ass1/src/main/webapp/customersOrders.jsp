@@ -10,14 +10,15 @@
 <html>
 <head>
     <title>Your Orders</title>
-    <style>
-        .container { width: 80%; margin: auto; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        .search-form { margin-top: 20px; }
-    </style>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+<div class="header">
+        <div class="logo">Iotbay</div>
+        <div class="topic">Product List</div>
+</div>
+
+<div class="body">
 <div class="container">
     <h1>Your Saved Orders</h1>
 
@@ -50,6 +51,7 @@
         </tr>
         <% } %>
     </table>
+</div>
 </div>
 </body>
 </html>
