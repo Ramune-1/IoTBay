@@ -111,6 +111,7 @@
             flex-direction: row;
             justify-content: space-between;
             width: 300px;
+            font-weight: bold;
         }
         a {
             text-decoration: none;
@@ -123,7 +124,7 @@
         .error{
             color: red;
             align-self: flex-start;
-            margin-left: 25px;
+            margin-left: 13px;
         }
     </style>
 </head>
@@ -134,14 +135,18 @@
             <div class="topic">Register</div>
         </div>
         <div class="right">
-            <a href="staff_register.jsp">Register as a staff</a>
+            <a href="staffRegister.jsp">Register as a staff</a>
         </div>
     </div>
     <div class="body">
         <div class="container">
             <div class="register"><h2>Register</h2></div>
-            <div class="error">this username exist</div>
+            
             <form action="RegisterServlet" method="post" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+            <div class="error">   <% String msg = (String) session.getAttribute("errorMsg"); %>
+                <% if (msg != null) { %>
+                    <div class="error"><%= msg %></div>
+                <% } %></div>
                 <div>
                     <label for="username">Username</label><br>
                     <input type="text" id="username" name="username" placeholder="omghaha" required><br>

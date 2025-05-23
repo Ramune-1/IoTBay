@@ -84,7 +84,7 @@
         }
     </style>
 </head>
-<jsp:include page="/ConnServlet" flush="true"/>
+
 <body>
     <div class="header">
         <div class="logo">Iotbay</div>

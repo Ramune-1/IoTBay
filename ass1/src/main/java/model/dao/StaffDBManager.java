@@ -12,7 +12,7 @@ public class StaffDBManager {
     }
 
     public void addStaff(String staffID, String username, String name, String gmail, String passWord, String phone, String gender ) throws SQLException{
-        PreparedStatement ps = conn.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?,?,?,?)");
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO Staff VALUES (?,?,?,?,?,?,?)");
         ps.setString(1, staffID);
         ps.setString(2, username);
         ps.setString(3, name);
@@ -43,6 +43,38 @@ public class StaffDBManager {
             return new StaffAccount(id, username, name, gmail, password, phone, gender);
         }
         return null;
+    }
+     public boolean checkExistUsername(String userName) throws SQLException{// this is to check whether the username alreadyc yse or not
+        PreparedStatement ps = conn.prepareStatement("SELECT USERNAME FROM Staff WHERE USERNAME = ?");
+
+        ps.setString(1, userName);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return true;
+      }
+      return false;
+    }
+
+    public boolean checkExistGmail(String gmail) throws SQLException{// this is to check whether the username alreadyc yse or not
+        PreparedStatement ps = conn.prepareStatement("SELECT GMAIL FROM Staff WHERE GMAIL = ?");
+
+        ps.setString(1, gmail);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return true;
+      }
+      return false;
+    }
+
+    public boolean checkExistPhone(String phone) throws SQLException{// this is to check whether the username alreadyc yse or not
+        PreparedStatement ps = conn.prepareStatement("SELECT PHONE FROM Staff WHERE PHONE = ?");
+
+        ps.setString(1, phone);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return true;
+      }
+      return false;
     }
 
 }
