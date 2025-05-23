@@ -148,7 +148,7 @@
         
         <div class="error">   <% String msg = (String) session.getAttribute("staffErrorMsg"); %>
                 <% if (msg != null) { %>
-                    <div class="error"><%= msg %></div>
+                    <div class="error"><%=msg %></div>
                 <% } %></div>
         <div>
             <label for="username">Username</label><br>
