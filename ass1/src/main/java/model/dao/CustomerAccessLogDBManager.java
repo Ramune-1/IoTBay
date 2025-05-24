@@ -41,13 +41,13 @@ public class CustomerAccessLogDBManager {
 
     public ArrayList<CustomerLog> findAllLog(String username) throws SQLException{
         ArrayList<CustomerLog> customerLogs = new ArrayList<>();
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM CustomerAccessLog WHERE USERNAME=? ORDER BY LOGINTIME DESC");
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM CustomerAccessLog WHERE USERNAME=? ORDER BY LOGINTIME DESC LIMIT 5");
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             String customerID = rs.getString("customerID");
             Timestamp loginTime = rs.getTimestamp("logintime");
-            Timestamp logoutTime =  rs.getTimestamp("logoutime");
+            Timestamp logoutTime =  rs.getTimestamp("logouttime");
             CustomerLog customerLog = new CustomerLog(customerID, username, loginTime, logoutTime);
             customerLogs.add(customerLog);
         }

@@ -1,6 +1,7 @@
 C:\IotBay\ass1\src\main\java\model\Delivery.java
 C:\IotBay\ass1\src\main\java\controller\LoginServlet.java
 C:\IotBay\ass1\src\main\java\model\CustomerLog.java
+C:\IotBay\ass1\src\main\java\model\PaymentRecord.java
 C:\IotBay\ass1\src\main\java\controller\AddToCartServlet.java
 C:\IotBay\ass1\src\main\java\controller\LogoutServlet.java
 C:\IotBay\ass1\src\main\java\model\Invoice.java
@@ -9,6 +10,7 @@ C:\IotBay\ass1\src\main\java\model\Customer.java
 C:\IotBay\ass1\src\main\java\model\dao\DBConnector.java
 C:\IotBay\ass1\src\main\java\controller\CustomerOrderListServlet.java
 C:\IotBay\ass1\src\main\java\controller\OrderServlet.java
+C:\IotBay\ass1\src\main\java\controller\AccountViewServlet.java
 C:\IotBay\ass1\src\main\java\model\dao\ProductDBManager.java
 C:\IotBay\ass1\src\main\java\model\dao\CustomerAccessLogDBManager.java
 C:\IotBay\ass1\src\main\java\model\Inventory.java
@@ -18,6 +20,7 @@ C:\IotBay\ass1\src\main\java\model\CartItem.java
 C:\IotBay\ass1\src\main\java\model\dao\OrderDBManager.java
 C:\IotBay\ass1\src\main\java\model\Order.java
 C:\IotBay\ass1\src\main\java\model\Payment.java
+C:\IotBay\ass1\src\main\java\model\PaymentMethod.java
 C:\IotBay\ass1\src\main\java\model\dao\StaffDBManager.java
 C:\IotBay\ass1\src\main\java\controller\StaffRegisterServlet.java
 C:\IotBay\ass1\src\main\java\model\StaffAccount.java

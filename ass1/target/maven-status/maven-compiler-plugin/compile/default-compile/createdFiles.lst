@@ -4,11 +4,14 @@ controller\CartServlet.class
 model\Cart.class
 model\dao\DBConnector.class
 model\dao\CustomerDBManager.class
+controller\AccountViewServlet.class
 controller\StaffRegisterServlet.class
 model\CartProduct.class
 controller\SaveOrderServlet.class
 controller\utility\Validator.class
+model\PaymentMethod$PaymentOption.class
 model\Payment$PaymentOption.class
+model\PaymentMethod.class
 model\Product.class
 model\dao\ProductDBManager.class
 model\Customer.class
@@ -19,6 +22,7 @@ controller\CustomerOrderListServlet.class
 controller\ProductServlet.class
 controller\ConnServlet.class
 model\dao\DB.class
+model\PaymentRecord.class
 model\Invoice.class
 controller\OrderServlet.class
 model\Payment.class

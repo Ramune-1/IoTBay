@@ -1,8 +1,7 @@
 package controller;
-import controller.utility.Validator;
+
 import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Time;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class AccountViewServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();
         List<CustomerLog> customerLogs = new ArrayList<>();
-        CustomerAccessLogDBManager customerAccessLogDBManager = (CustomerAccessLogDBManager) session.getAttribute("customerAccessLogDBManager");
+        CustomerAccessLogDBManager customerAccessLogDBManager = (CustomerAccessLogDBManager) session.getAttribute("customerAccessLogManager");
         Customer customer = (Customer) session.getAttribute("customer");
 
         try {
@@ -32,7 +31,10 @@ public class AccountViewServlet extends HttpServlet {
         } catch (Exception e) {
          e.printStackTrace();
         }
-
-        session.setAttribute("customerLogs", customerLogs);
+       
+           session.setAttribute("customerLogs", customerLogs);
+            request.getRequestDispatcher("accountView.jsp").include(request, response); 
+        
+        
     }
 }

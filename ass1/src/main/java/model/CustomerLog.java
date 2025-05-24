@@ -1,15 +1,17 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class CustomerLog {
     private String customerID;
     private String username;
-    private String loginTime;
-    private String logoutTime;
+    private Timestamp loginTime;
+    private Timestamp logoutTime;
 
 
 
 
-    public CustomerLog(String customerID, String username, String loginTime, String logoutTime) {
+    public CustomerLog(String customerID, String username, Timestamp loginTime, Timestamp logoutTime) {
         this.customerID = customerID;
         this.username = username;
         this.loginTime = loginTime;
@@ -32,19 +34,19 @@ public class CustomerLog {
         this.username = username;
     }
 
-    public String getLoginTime() {
+    public Timestamp getLoginTime() {
         return this.loginTime;
     }
 
-    public void setLoginTime(String loginTime) {
+    public void setLoginTime(Timestamp loginTime) {
         this.loginTime = loginTime;
     }
 
-    public String getLogoutTime() {
+    public Timestamp getLogoutTime() {
         return this.logoutTime;
     }
 
-    public void setLogoutTime(String logoutTime) {
+    public void setLogoutTime(Timestamp logoutTime) {
         this.logoutTime = logoutTime;
     }
 
