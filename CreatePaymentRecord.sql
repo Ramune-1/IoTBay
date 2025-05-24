@@ -1,9 +1,9 @@
 CREATE TABLE paymentrecord(
-    paymentID INT ,
+    paymentrecordID INT ,
     ORDERID VARCHAR(36),
     paymentmethodID INT,
-    
-    PRIMARY KEY (paymentID),
+    paymentstatus VARCHAR(36),
+    PRIMARY KEY (paymentrecordID),
     FOREIGN KEY (ORDERID) REFERENCES CustomerOrder(ORDERID),
     FOREIGN KEY (paymentmethodID) REFERENCES paymentmethod(paymentmethodID)
 
