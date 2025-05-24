@@ -50,11 +50,7 @@ public class LoginServlet extends HttpServlet{
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else if (customer != null){
             try {
-                if (customerAccessLogManager.findCustomerLog(userName) == true) {
-                    customerAccessLogManager.updateCustomerLogin(userName);
-                }else if (customerAccessLogManager.findCustomerLog(userName) == false){
-                    customerAccessLogManager.addLog(customer.getCustomerID(), userName);
-                }
+               customerAccessLogManager.addLog(customer.getCustomerID(), userName);
             } catch (Exception ex) {
                     Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);            }
             session.setAttribute("customer", customer);// if customer find set session for customer

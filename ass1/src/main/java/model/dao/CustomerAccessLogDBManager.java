@@ -2,6 +2,9 @@ package model.dao;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import model.CustomerLog;
 
 public class CustomerAccessLogDBManager {
@@ -34,5 +37,20 @@ public class CustomerAccessLogDBManager {
     public void updateCustomerLogout(String username) throws SQLException{
         PreparedStatement ps = conn.prepareStatement("UPDATE CustomerAccessLog SET LOGOUTIME=CURRENT_TIMESTAMP");
         ps.executeUpdate();
+    }
+
+    public ArrayList<CustomerLog> findAllLog(String username) throws SQLException{
+        ArrayList<CustomerLog> customerLogs = new ArrayList<>();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM CustomerAccessLog WHERE USERNAME=? ORDER BY LOGINTIME DESC");
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            String customerID = rs.getString("customerID");
+            Timestamp loginTime = rs.getTimestamp("logintime");
+            Timestamp logoutTime =  rs.getTimestamp("logoutime");
+            CustomerLog customerLog = new CustomerLog(customerID, username, loginTime, logoutTime);
+            customerLogs.add(customerLog);
+        }
+        return customerLogs;
     }
 }

@@ -16,5 +16,7 @@
 <form action="ProductServlet" method="get">
     <button type="submit">View our catalogue of IOT Devices!</button>
 </form>
-
+<form action="AccountViewServlet" method="get"> <!--just for testing-->
+    <button type="submit">ViewAccount</button>
+</form>
 </body></html>
