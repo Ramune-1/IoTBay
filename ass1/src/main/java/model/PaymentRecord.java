@@ -7,17 +7,22 @@ public class PaymentRecord {
     private int customerID;
     private LocalDate date;
     private double amount;
+    // holds an instance of payment method 
+    private PaymentMethod paymentmethod;
+    private Order order;
 
     
     
 
 
 
-    public PaymentRecord(int paymentID, int customerID, LocalDate date, double amount) {
+    public PaymentRecord(int paymentID, int customerID, LocalDate date, double amount,Order order) {
         this.paymentID = paymentID;
         this.customerID = customerID;
         this.date = date;
         this.amount = amount;
+        this.order= order;
+
     }
 
     public int getPaymentID() {
