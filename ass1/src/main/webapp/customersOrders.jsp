@@ -17,7 +17,6 @@
         <div class="logo">Iotbay</div>
         <div class="topic">Product List</div>
 </div>
-
 <div class="body">
 <div class="container">
     <h1>Your Saved Orders</h1>
@@ -30,9 +29,9 @@
 
     <table>
         <tr>
-            <th>Order ID</th>
+            <th>Order Number</th>
             <th>Total Price</th>
-            <th>Date</th>
+            <th>Date and Time of Order</th>
         </tr>
         <%
             for (Order order : orders) {
