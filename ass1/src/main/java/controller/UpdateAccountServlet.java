@@ -50,9 +50,9 @@ public class UpdateAccountServlet extends HttpServlet{
         try {// check username
             if (userName.equals(customer.getUserName())) {
                 existUserName = false;
-            } else if (!userName.equals(customer.getUserName()) && customerManager.checkExistUsername(userName) == false) {
+            } else if (!userName.equals(customer.getUserName()) && customerManager.checkExistUsername(userName) == true) {
                 existUserName = true;
-            }
+            } 
         } catch (Exception ex) {
          Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -61,7 +61,7 @@ public class UpdateAccountServlet extends HttpServlet{
         try {
             if (gmail.equals(customer.getGmail())) {
                 existGmail = false;
-            } else if (!gmail.equals(customer.getGmail()) && customerManager.checkExistGmail(gmail) == false) {
+            } else if (!gmail.equals(customer.getGmail()) && customerManager.checkExistGmail(gmail) == true) {
                 existGmail = true;
             }
         } catch (Exception ex) {
@@ -71,7 +71,7 @@ public class UpdateAccountServlet extends HttpServlet{
         try {
            if (phone.equals(customer.getPhone())) {
                 existPhone = false;
-            } else if (!phone.equals(customer.getPhone()) && customerManager.checkExistPhone(phone) == false) {
+            } else if (!phone.equals(customer.getPhone()) && customerManager.checkExistPhone(phone) == true) {
                 existPhone = true;
             }
         }catch (Exception ex){
@@ -91,19 +91,23 @@ public class UpdateAccountServlet extends HttpServlet{
       
 
         if (existUserName) {
-            session.setAttribute("updateError", "This user name exist");
+            session.setAttribute("updateError", "This username has been used");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
-        } else if (existGmail) {
-            session.setAttribute("updateError", "This gmail exist");
+        } else if (existGmail ) {
+            session.setAttribute("updateError", "This gmail has been used");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
-        } else if (!validator.gmailValidate(gmail)){
-            session.setAttribute("updateError", "gmail in valid");
+        } else if (existPhone){
+             session.setAttribute("updateError", "This phone has been used");
+            request.getRequestDispatcher("updateAccount.jsp").include(request, response);
+        }
+        else if (!validator.gmailValidate(gmail)){
+            session.setAttribute("updateError", "Gmail in valid");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         } else if (!validator.userNameValidate(userName)) {
-            session.setAttribute("updateError", "username  in valid");
+            session.setAttribute("updateError", "Username  in valid");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         } else if (!validator.passwordValidate(passWord)) {
-            session.setAttribute("updateError", "password in valid");
+            session.setAttribute("updateError", "Password in valid");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         } else  if (existGmail == false && existUserName == false && existPhone == false) {
            session.setAttribute("customer", customer);

@@ -46,13 +46,15 @@
                                 <td><%= product.getDescription() %></td>
                                 <td>$<%= String.format("%.2f", product.getPrice()) %></td>
                                 <td>
-                                    <input type="number" name="quantity_<%= product.getProductID() %>" min="0" value="0" style="width: 60px; padding: 6px;">
+                                    <input type="number" name="quantity_<%= product.getProductID() %>" min="0" value="0" class="quantity-input"/>
                                 </td>
                             </tr>
                         <% } %>
                     </table>
                     <br>
-                    <button type="submit" style="margin-top: 10px;">Proceed</button>
+                    <div class="button-row">
+                    <button type="submit" class="submit-button">Proceed</button>
+                    </div>
                 </form>
             <% } %>
         </div>

@@ -167,7 +167,7 @@
     <div class="body"> <div class="container">
         
         <div class="update"><h2>Update</h2></div>
-        <form action="UpdateAccountServlet" method="post">
+        <form action="UpdateAccountServlet" method="post" style="width:100%;display:flex;flex-direction:column;align-items:center;">
          <div class="error">   <% String msg = (String) session.getAttribute("updateError"); %>
                 <% if (msg != null) { %>
                     <div class="error"><%= msg %></div>
