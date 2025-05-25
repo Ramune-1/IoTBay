@@ -1,6 +1,8 @@
 model\CartItem.class
 model\dao\OrderDBManager.class
+model\dao\PaymentRecordDBmanager.class
 controller\CartServlet.class
+controller\UpdateAccountServlet.class
 model\Cart.class
 model\dao\DBConnector.class
 model\dao\CustomerDBManager.class
@@ -13,6 +15,7 @@ model\PaymentMethod$PaymentOption.class
 model\Payment$PaymentOption.class
 model\PaymentMethod.class
 model\Product.class
+controller\PaymentServlet.class
 model\dao\ProductDBManager.class
 model\Customer.class
 model\Inventory.class
@@ -32,5 +35,6 @@ model\Delivery.class
 model\CustomerLog.class
 model\dao\StaffDBManager.class
 model\Delivery$Status.class
+model\dao\PaymentMethodDBManager.class
 controller\RegisterServlet.class
 model\StaffAccount.class

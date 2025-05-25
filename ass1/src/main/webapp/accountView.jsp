@@ -122,7 +122,8 @@
         table{
             border-collapse: collapse;
             margin-top: 50px;
-            width: 500px;
+                width: 550px;
+      margin-left: -10px;
         }
         th{
             background-color: rgb(172, 171, 171);
@@ -150,7 +151,7 @@
                 <div class="info"><p>Gmail</p><div class="info-box"><%= customer.getGmail()%></div></div>
                 <div class="info"><p>Password</p><div class="info-box"><%= customer.getPassWord() %></div></div>
                 <div class="info"><p>Gender</p><div class="info-box"><%= customer.getGender()%></div></div>
-                    <a href="" class="change">Update information</a>
+                    <a href="updateAccount.jsp" class="change">Update information</a>
                 </div>
             </div>
             <div class="log-history">

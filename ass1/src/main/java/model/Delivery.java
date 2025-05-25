@@ -1,6 +1,8 @@
 package model;
 
+
 import java.time.LocalDate;
+
 
 public class Delivery {
     enum Status{
@@ -64,6 +66,7 @@ public class Delivery {
 
     public void setStatus(Status status) {
         this.status = status;
+        
     }
 
     public LocalDate getDate() {
