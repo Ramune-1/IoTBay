@@ -71,9 +71,20 @@
                 <a href="checkout.jsp">Proceed to Checkout</a>
 
                 <p>Would you like to save your order, <%= customer.getUserName() %>?</p>
-                <form method="post" action="SaveOrderServlet">
+                <div class="button-row">
+                    <form method="post" action="SaveOrderServlet" class="button-wrapper">
                     <button type="submit" class="submit-button">Save Order</button>
-                </form>
+                    </form>
+
+                    <div class="button-wrapper">
+                    <button type="button" class="submit-button" onclick="history.back()">Edit Order</button>
+                    </div>
+
+                    <form method="post" action="CancelOrderServlet" class="button-wrapper">
+                    <button type="submit" class="submit-button">Cancel Order</button>
+                    </form>
+                </div>
+                
 
             <%
                 }

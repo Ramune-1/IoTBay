@@ -98,9 +98,7 @@ public class CustomerDBManager {
       return false;
     }
 
-    public void updatePassword(){
-        
-    }
+   
 
 }
 
