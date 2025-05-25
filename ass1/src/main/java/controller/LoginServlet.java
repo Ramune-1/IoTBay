@@ -21,6 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.Customer;
+import model.CustomerLog;
 import model.dao.CustomerAccessLogDBManager;
 import model.dao.CustomerDBManager;
 
@@ -36,7 +37,9 @@ public class LoginServlet extends HttpServlet{
         CustomerDBManager customerManager = (CustomerDBManager) session.getAttribute("customerManager");// manager is from ConnServlet
         CustomerAccessLogDBManager customerAccessLogManager = (CustomerAccessLogDBManager) session.getAttribute("customerAccessLogManager");
         if (customerManager == null) throw new IOException("Manager not found");
+        if (customerAccessLogManager == null) throw new IOException("Manager not found");
         Customer customer = null;// create customer instance
+        CustomerLog customerLog = null;
         try {
             customer = customerManager.findCustomer(userName, passWord); // use function to check exist
         } catch (Exception ex) {
@@ -51,8 +54,11 @@ public class LoginServlet extends HttpServlet{
         } else if (customer != null){
             try {
                customerAccessLogManager.addLog(customer.getCustomerID(), userName);
+               customerLog = customerAccessLogManager.findCustomerLog(customer.getCustomerID());
             } catch (Exception ex) {
-                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);            }
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex); 
+                }
+            session.setAttribute("customerLog", customerLog);
             session.setAttribute("customer", customer);// if customer find set session for customer
             request.getRequestDispatcher("welcome.jsp").include(request, response);
         }else {

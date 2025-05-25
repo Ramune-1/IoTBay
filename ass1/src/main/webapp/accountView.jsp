@@ -33,10 +33,20 @@
             background-color: white;
             width: 100%;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             padding-left: 70px;
-            
+            font-family: Arial, Helvetica, sans-serif ;
+        }
+        .left{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .right{
+            margin-right: 50px;
+           color:  rgb(17, 125, 139);
+           font-weight: bold;
         }
         .logo{
             font-size: 30px;
@@ -137,9 +147,10 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">Iotbay</div>
-        <div class="topic">Account</div>
+      <div class="header">
+          <div class="left"><div class="logo">Iotbay</div>
+        <div class="topic">Account</div></div>
+        <div class="right"><a href="LogoutServlet">Logout</a></div>
     </div>
     <div class="body">
         <div class="container">

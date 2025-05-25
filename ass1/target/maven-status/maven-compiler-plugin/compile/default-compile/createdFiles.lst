@@ -34,6 +34,7 @@ controller\AddToCartServlet.class
 model\Delivery.class
 model\CustomerLog.class
 model\dao\StaffDBManager.class
+controller\LogoutServlet.class
 model\Delivery$Status.class
 model\dao\PaymentMethodDBManager.class
 controller\RegisterServlet.class

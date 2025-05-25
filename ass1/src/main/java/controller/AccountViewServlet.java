@@ -27,7 +27,7 @@ public class AccountViewServlet extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("customer");
 
         try {
-            customerLogs = customerAccessLogDBManager.findAllLog(customer.getUserName());
+            customerLogs = customerAccessLogDBManager.findAllLog(customer.getCustomerID());
         } catch (Exception e) {
          e.printStackTrace();
         }
