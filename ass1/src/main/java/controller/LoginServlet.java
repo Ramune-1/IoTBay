@@ -61,7 +61,8 @@ public class LoginServlet extends HttpServlet{
                 }
             session.setAttribute("customerLog", customerLog);
             session.setAttribute("customer", customer);// if customer find set session for customer
-            request.getRequestDispatcher("welcome.jsp").include(request, response);
+            //request.getRequestDispatcher("ProductServlet").include(request, response);
+            response.sendRedirect("ProductServlet");
         }else {
             session.setAttribute("errorMsg", "Input invalid");
             request.getRequestDispatcher("login.jsp").include(request, response);

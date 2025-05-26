@@ -20,7 +20,7 @@ import model.dao.CustomerAccessLogDBManager;;
 public class AccountViewServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();
         List<CustomerLog> customerLogs = new ArrayList<>();
         CustomerAccessLogDBManager customerAccessLogDBManager = (CustomerAccessLogDBManager) session.getAttribute("customerAccessLogManager");
