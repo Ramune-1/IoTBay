@@ -4,7 +4,7 @@ import controller.utility.Validator;
 import java.io.IOException;
 
 import java.sql.SQLException;
-
+import java.util.UUID;
 import java.util.logging.Level;
 
 import java.util.logging.Logger;
@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();// first we have to get the first session
         Validator validator = new Validator();
+        String logID = UUID.randomUUID().toString();
         String userName = request.getParameter("username");
         String passWord = request.getParameter("password");
         CustomerDBManager customerManager = (CustomerDBManager) session.getAttribute("customerManager");// manager is from ConnServlet
@@ -53,7 +54,7 @@ public class LoginServlet extends HttpServlet{
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else if (customer != null){
             try {
-               customerAccessLogManager.addLog(customer.getCustomerID(), userName);
+               customerAccessLogManager.addLog(logID, customer.getCustomerID(), userName);
                customerLog = customerAccessLogManager.findCustomerLog(customer.getCustomerID());
             } catch (Exception ex) {
                     Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex); 
@@ -62,7 +63,7 @@ public class LoginServlet extends HttpServlet{
             session.setAttribute("customer", customer);// if customer find set session for customer
             request.getRequestDispatcher("welcome.jsp").include(request, response);
         }else {
-            session.setAttribute("errorMsg", "You 've entered the wrong credentials, try again");
+            session.setAttribute("errorMsg", "Input invalid");
             request.getRequestDispatcher("login.jsp").include(request, response);
         }
     }
