@@ -3,9 +3,10 @@
 <%@ page import="model.Customer"%>
 <%@ page import="model.CustomerLog"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<% Customer customer = (Customer) session.getAttribute("customer");%>
-<% ArrayList<CustomerLog> customerLogs = (ArrayList<CustomerLog>) session.getAttribute("customerLogs"); %>
+
+<% ArrayList<String[]> historyLog = (ArrayList<String[]>) session.getAttribute("historyLog"); %>
 <%@ page import="java.util.ArrayList" %>
+<% Customer customer = (Customer) session.getAttribute("customer"); %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
         }
         body{
             font-family: Arial, Helvetica, sans-serif ;
+            background-color: rgb(17, 125, 139);
         }
         .body {
             display: flex;
@@ -28,7 +30,7 @@
             font-family: Arial, Helvetica, sans-serif;
             flex-direction: column;
         }
-        .header{
+     .header {
             height: 60px;
             background-color: white;
             width: 100%;
@@ -36,31 +38,50 @@
             justify-content: space-between;
             align-items: center;
             padding-left: 70px;
-            font-family: Arial, Helvetica, sans-serif ;
+            font-family: Arial, Helvetica, sans-serif;
         }
-        .left{
+        .left {
             display: flex;
             flex-direction: row;
             align-items: center;
         }
-        .right{
-            margin-right: 50px;
-           
-           font-weight: bold;
-        }
-        .right a{
-          text-decoration: none;
-          color:  rgb(17, 125, 139);
-        }
-        .logo{
+        .logo {
             font-size: 30px;
-            font-weight: bolder;
-            color: rgb(17, 125, 139) ;
+            font-weight: bold;
+            color: rgb(17, 125, 139);
         }
-        .topic{
+        .topic {
             font-size: 25px;
-            font-weight: 500px;
+            font-weight: 500;
             margin-left: 10px;
+        }
+        .right {
+            margin-right: 20px;
+            color: rgb(17, 125, 139);
+            font-weight: bold;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .right a {
+            color: rgb(17, 125, 139);
+            text-decoration: none;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-weight: bold;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .right a:hover{
+            background-color: rgb(235, 232, 232);
+             color: rgb(9, 66, 73);
+            height: 60px;
+        }
+        .right .current
+        {
+            background-color: rgb(17, 125, 139);
+            color: white;
         }
         .container{
             margin-top: -10px;
@@ -172,11 +193,19 @@
     </style>
 </head>
 <body>
-      <div class="header">
-          <div class="left"><div class="logo">Iotbay</div>
-        <div class="topic">Account</div></div>
-        <div class="right"><a href="LogoutServlet">Logout</a></div>
+       <div class="header">
+        <div class="left">
+            <div class="logo">Iotbay</div>
+            <div class="topic">Account</div>
+        </div>
+        <div class="right">
+            <a href="productList.jsp">Shopping</a>
+            <a href="">Cart</a>
+            <a href="" class="current">Account</a> 
+            <a href="LogoutServlet">Logout</a>
+        </div>
     </div>
+
     <div class="body">
         <div class="container">
             <div class="account">
@@ -200,11 +229,10 @@
                     <th>Login Time</th>
                     <th>Logout Time</th>
                 </tr>
-                <% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-                for (int i = 0 ; i < customerLogs.size(); i++){
-                    String loginTime = sdf.format(customerLogs.get(i).getLoginTime());
-                    String logoutTime = (customerLogs.get(i).getLogoutTime() != null ) ? sdf.format(customerLogs.get(i).getLogoutTime()) : "-";        
-                 %>
+                <% 
+                for (String[] log: historyLog){
+                    String loginTime = log[0];
+                    String logoutTime = log[1]; %>
                 <tr>
                     <td><%=loginTime%></td>
                     <td><%=logoutTime%></td>

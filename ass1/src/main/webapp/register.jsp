@@ -143,7 +143,7 @@
             <div class="register"><h2>Register</h2></div>
             
             <form action="RegisterServlet" method="post" style="width:100%;display:flex;flex-direction:column;align-items:center;">
-            <div class="error">   <% String msg = (String) session.getAttribute("errorMsg"); %>
+            <div class="error">   <% String msg = (String) session.getAttribute("registerErrorMsg"); %>
                 <% if (msg != null) { %>
                     <div class="error"><%= msg %></div>
                 <% } %></div>

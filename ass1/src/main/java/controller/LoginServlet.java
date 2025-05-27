@@ -47,10 +47,10 @@ public class LoginServlet extends HttpServlet{
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (!validator.userNameValidate(userName)) {
-            session.setAttribute("errorMsg", "Your user name imput not valid");//RegEX
+            session.setAttribute("errorMsg", "*Your user name imput not valid");//RegEX
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else if (!validator.passwordValidate(passWord)) {
-            session.setAttribute("errorMsg", "Your password input not valid");//RegEX
+            session.setAttribute("errorMsg", "*Your password input not valid");//RegEX
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else if (customer != null){
             try {
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet{
             //request.getRequestDispatcher("ProductServlet").include(request, response);
             response.sendRedirect("ProductServlet");
         }else {
-            session.setAttribute("errorMsg", "Input invalid");
+            session.setAttribute("errorMsg", "*Password or username incorrect");
             request.getRequestDispatcher("login.jsp").include(request, response);
         }
     }

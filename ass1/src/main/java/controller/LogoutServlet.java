@@ -33,11 +33,15 @@ public class LogoutServlet extends HttpServlet{
         CustomerAccessLogDBManager customerAccessLogManager = (CustomerAccessLogDBManager) session.getAttribute("customerAccessLogManager");
         Customer customer = (Customer) session.getAttribute("customer");
         CustomerLog customerLog = (CustomerLog) session.getAttribute("customerLog");
-        try {
+
+        if (customer != null && customerLog != null) {
+            try {
             customerAccessLogManager.updateCustomerLogout(customer.getCustomerID(),customerLog.getLogID());
         } catch (Exception ex) {
             Logger.getLogger(LogoutServlet.class.getName()).log(Level.SEVERE, null, ex);
         }   
+        }
+        
         session.invalidate();
         response.sendRedirect("index.jsp");
     } 

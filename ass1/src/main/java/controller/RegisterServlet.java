@@ -79,24 +79,24 @@ public class RegisterServlet extends HttpServlet{
         }
 
         if (existUserName) {
-            session.setAttribute("errorMsg", "This user name exist");
+            session.setAttribute("registerErrorMsg", "*This user name exist");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else if (existGmail) {
-            session.setAttribute("errorMsg", "This gmail exist");
+            session.setAttribute("registerErrorMsg", "*This gmail exist");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else if (!validator.gmailValidate(gmail)){
-            session.setAttribute("errorMsg", "gmail in valid");
+            session.setAttribute("registerErrorMsg", "*Gmail invalid");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else if (!validator.userNameValidate(userName)) {
-            session.setAttribute("errorMsg", "username  in valid");
+            session.setAttribute("registerErrorMsg", "*Username invalid");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else if (!validator.passwordValidate(passWord)) {
-            session.setAttribute("errorMsg", "password in valid");
+            session.setAttribute("registerErrorMsg", "*Password invalid");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else if (customer != null){
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else if (customer == null){
-            session.setAttribute("errorMsg", "IT's error");
+            session.setAttribute("registerErrorMsg", "*IT's error");
             request.getRequestDispatcher("register.jsp").include(request, response);
         }
 

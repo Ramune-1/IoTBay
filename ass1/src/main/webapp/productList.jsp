@@ -41,6 +41,7 @@
             justify-content: space-between;
             align-items: center;
             padding-left: 70px;
+            font-family: Arial, Helvetica, sans-serif;
         }
         .left {
             display: flex;
@@ -238,6 +239,7 @@ input[type="submit"]:hover {
             <a  class="current">Shopping</a>
             <a href="">Cart</a>
             <a href="AccountViewServlet">Account</a> 
+            <a href="LogoutServlet">Logout</a>
         </div>
     </div>
 

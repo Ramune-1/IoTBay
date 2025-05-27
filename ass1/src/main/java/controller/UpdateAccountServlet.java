@@ -54,7 +54,7 @@ public class UpdateAccountServlet extends HttpServlet{
                 existUserName = true;
             } 
         } catch (Exception ex) {
-         Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(UpdateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
 
         }
          
@@ -65,7 +65,7 @@ public class UpdateAccountServlet extends HttpServlet{
                 existGmail = true;
             }
         } catch (Exception ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);         
+            Logger.getLogger(UpdateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);         
        
         }
         try {
@@ -75,7 +75,7 @@ public class UpdateAccountServlet extends HttpServlet{
                 existPhone = true;
             }
         }catch (Exception ex){
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if (existGmail == false && existUserName == false && existPhone == false) {
@@ -83,7 +83,7 @@ public class UpdateAccountServlet extends HttpServlet{
                   customerManager.updateCustomer(customer.getCustomerID(), userName, name, gmail, passWord, phone, gender);
                 customer = customerManager.findCustomer(userName, passWord);
             } catch (Exception ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UpdateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
                
                 
             }
@@ -91,29 +91,29 @@ public class UpdateAccountServlet extends HttpServlet{
       
 
         if (existUserName) {
-            session.setAttribute("updateError", "This username has been used");
+            session.setAttribute("updateError", "*This username has been used");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         } else if (existGmail ) {
-            session.setAttribute("updateError", "This gmail has been used");
+            session.setAttribute("updateError", "*This gmail has been used");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         } else if (existPhone){
-             session.setAttribute("updateError", "This phone has been used");
+             session.setAttribute("updateError", "*This phone has been used");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         }
         else if (!validator.gmailValidate(gmail)){
-            session.setAttribute("updateError", "Gmail in valid");
+            session.setAttribute("updateError", "*Gmail invalid");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         } else if (!validator.userNameValidate(userName)) {
-            session.setAttribute("updateError", "Username  in valid");
+            session.setAttribute("updateError", "*Username  invalid");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         } else if (!validator.passwordValidate(passWord)) {
-            session.setAttribute("updateError", "Password in valid");
+            session.setAttribute("updateError", "*Password invalid");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         } else  if (existGmail == false && existUserName == false && existPhone == false) {
            session.setAttribute("customer", customer);
             request.getRequestDispatcher("accountView.jsp").forward(request, response);
         } else{
-            session.setAttribute("updateError", "IT's error");
+            session.setAttribute("updateError", "*IT's error");
             request.getRequestDispatcher("updateAccount.jsp").include(request, response);
         }
     }
