@@ -22,6 +22,12 @@ public class CustomerDBManager {
         ps.executeUpdate();
     } 
 
+    public void removeCustomer(String customerID) throws SQLException{
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM Customer WHERE CUSTOMERID=?");
+        ps.setString(1, customerID);
+        ps.executeUpdate();
+    }
+
 
     public void updateCustomer(String customerID, String userName, String name, String gmail, String passWord, String phone, String gender) throws SQLException {
             PreparedStatement ps = conn.prepareStatement("UPDATE Customer SET userName = ?, name = ?, gmail = ?, passWord = ?, phone = ?, gender = ? WHERE customerID = ?");

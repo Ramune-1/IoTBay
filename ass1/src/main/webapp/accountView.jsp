@@ -45,8 +45,12 @@
         }
         .right{
             margin-right: 50px;
-           color:  rgb(17, 125, 139);
+           
            font-weight: bold;
+        }
+        .right a{
+          text-decoration: none;
+          color:  rgb(17, 125, 139);
         }
         .logo{
             font-size: 30px;
@@ -110,25 +114,24 @@
             align-content: center;
             padding-left: 5px;
         }
-        .change{
-            background-color: rgb(17, 125, 139);
-            width: 100px;
-            height: 30px;
-            margin-left: 450px;
-            font-size: 10px;
-            text-decoration: none;
-            align-content: center;
-            padding-left: 6px;
-            border-radius: 10px;
-            color: white;
-            border-color: black;
-            border-width: 2px;
-            border-style: solid;
-        }
-        .change:hover{
-            background-color: rgb(142, 190, 197);
-            color: black;
-        }
+         .change {
+      background-color: rgb(17, 125, 139);
+      width: 100px;
+      height: 30px;
+   
+      font-size: 10px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      color: white;
+      border: 2px solid black;
+    }
+    .change:hover {
+      background-color: rgb(142, 190, 197);
+      color: black;
+    }
         table{
             border-collapse: collapse;
             margin-top: 50px;
@@ -144,6 +147,28 @@
             text-align: center;
             font-size: 15px;
         }
+           .account-edit{
+      display: flex;
+      justify-content: space-between;
+    }
+        .remove {
+      background-color: rgb(196, 196, 196);
+      width: 100px;
+      height: 30px;
+   
+      font-size: 10px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      color: black;
+      border: 2px solid black;
+    }
+    .remove:hover {
+      background-color: rgb(80, 80, 80);
+      color: rgb(255, 255, 255);
+    }
     </style>
 </head>
 <body>
@@ -162,7 +187,8 @@
                 <div class="info"><p>Gmail</p><div class="info-box"><%= customer.getGmail()%></div></div>
                 <div class="info"><p>Password</p><div class="info-box"><%= customer.getPassWord() %></div></div>
                 <div class="info"><p>Gender</p><div class="info-box"><%= customer.getGender()%></div></div>
-                    <a href="updateAccount.jsp" class="change">Update information</a>
+                    <div class="account-edit"><a href="remove.jsp"class="remove">Remove</a>
+                    <a href="updateAccount.jsp" class="change">Update information</a></div>
                 </div>
             </div>
             <div class="log-history">

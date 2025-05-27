@@ -51,20 +51,20 @@ public class RegisterServlet extends HttpServlet{
           existUserName = customerManager.checkExistUsername(userName);
          
         } catch (Exception ex) {
-         Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
 
         }
          
         try {
             existGmail = customerManager.checkExistGmail(gmail);
         } catch (Exception ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);         
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);         
        
         }
         try {
             existPhone = customerManager.checkExistPhone(phone);
         }catch (Exception ex){
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (existGmail == false && existUserName == false && existPhone == false) {
@@ -72,7 +72,7 @@ public class RegisterServlet extends HttpServlet{
                 customerManager.addCustomer(customerID,userName,name,gmail,passWord,phone,gender);
                 customer = customerManager.findCustomer(userName, passWord);
             } catch (Exception ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
                
                 
             }
