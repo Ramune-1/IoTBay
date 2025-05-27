@@ -22,10 +22,22 @@ public class StaffDBManager {
         ps.setString(7, gender);
         ps.executeUpdate();
     } 
+    
+    public void updateStaff(String staffID, String userName, String name, String gmail, String passWord, String phone, String gender) throws SQLException {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Staff SET userName = ?, name = ?, gmail = ?, passWord = ?, phone = ?, gender = ? WHERE STAFFID = ?");
+            ps.setString(1, userName);
+            ps.setString(2, name);
+            ps.setString(3, gmail);
+            ps.setString(4, passWord);
+            ps.setString(5, phone);
+            ps.setString(6, gender);
+            ps.setString(7, staffID);
+            ps.executeUpdate();
+        }
 
-    public void removeStaff(String username) throws SQLException{
-        PreparedStatement ps = conn.prepareStatement("DELETE FROM Staff WHERE USERNAME = ? ");
-        ps.setString(1, username);
+    public void removeStaff(String staffID) throws SQLException{
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM Staff WHERE STAFFID = ? ");
+        ps.setString(1, staffID);
         ps.executeUpdate();
     }
 

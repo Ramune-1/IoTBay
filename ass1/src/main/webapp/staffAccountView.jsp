@@ -217,7 +217,7 @@
                 <div class="info"><p>Phone</p><div class="info-box"><%= staff.getPhone() %></div></div>
                 <div class="info"><p>Gender</p><div class="info-box"><%= staff.getGender()%></div></div>
                     <div class="account-edit"><a href="remove.jsp"class="remove">Remove</a>
-                    <a href="updateAccount.jsp" class="change">Update information</a></div>
+                    <a href="updateStaffAccount.jsp" class="change">Update information</a></div>
                 </div>
             </div>
             <div class="log-history">

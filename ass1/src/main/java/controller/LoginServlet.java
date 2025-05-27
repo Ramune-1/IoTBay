@@ -22,8 +22,10 @@ import jakarta.servlet.http.HttpSession;
 
 import model.Customer;
 import model.CustomerLog;
+import model.StaffAccessLog;
 import model.dao.CustomerAccessLogDBManager;
 import model.dao.CustomerDBManager;
+import model.dao.StaffAccessLogDBManager;
 import model.dao.StaffDBManager;
 import model.StaffAccount;
 
@@ -40,12 +42,14 @@ public class LoginServlet extends HttpServlet{
         CustomerDBManager customerManager = (CustomerDBManager) session.getAttribute("customerManager");// manager is from ConnServlet
         CustomerAccessLogDBManager customerAccessLogManager = (CustomerAccessLogDBManager) session.getAttribute("customerAccessLogManager");
         StaffDBManager staffDBManager = (StaffDBManager) session.getAttribute("staffManager");
+        StaffAccessLogDBManager staffAccessLogManager = (StaffAccessLogDBManager) session.getAttribute("staffLogManager");
         if (customerManager == null) throw new IOException("Customer Manager not found");
         if (staffDBManager == null) throw new IOException("Staff Manager not found");
         if (customerAccessLogManager == null) throw new IOException("Manager not found");
         Customer customer = null;// create customer instance
         CustomerLog customerLog = null;
         StaffAccount staffAccount = null;
+        StaffAccessLog staffAccessLog = null;
         try {
             customer = customerManager.findCustomer(userName, passWord); // use function to check exist
         } catch (Exception ex) {
@@ -75,6 +79,13 @@ public class LoginServlet extends HttpServlet{
             //request.getRequestDispatcher("ProductServlet").include(request, response);
             response.sendRedirect("ProductServlet");
         }else if(staffAccount != null){
+            try {
+                staffAccessLogManager.addLog(logID, staffAccount.getStaffID(), userName);
+                staffAccessLog = staffAccessLogManager.findStaffAccessLog(staffAccount.getStaffID());
+            } catch (Exception e) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, e); 
+            }
+            session.setAttribute("staffLog", staffAccessLog);
             session.setAttribute("staff", staffAccount);
             request.getRequestDispatcher("staffWelcome.jsp").include(request, response);
         }else {
