@@ -24,6 +24,8 @@ import model.Customer;
 import model.CustomerLog;
 import model.dao.CustomerAccessLogDBManager;
 import model.dao.CustomerDBManager;
+import model.dao.StaffDBManager;
+import model.StaffAccount;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet{
@@ -37,14 +39,23 @@ public class LoginServlet extends HttpServlet{
         String passWord = request.getParameter("password");
         CustomerDBManager customerManager = (CustomerDBManager) session.getAttribute("customerManager");// manager is from ConnServlet
         CustomerAccessLogDBManager customerAccessLogManager = (CustomerAccessLogDBManager) session.getAttribute("customerAccessLogManager");
-        if (customerManager == null) throw new IOException("Manager not found");
+        StaffDBManager staffDBManager = (StaffDBManager) session.getAttribute("staffManager");
+        if (customerManager == null) throw new IOException("Customer Manager not found");
+        if (staffDBManager == null) throw new IOException("Staff Manager not found");
         if (customerAccessLogManager == null) throw new IOException("Manager not found");
         Customer customer = null;// create customer instance
         CustomerLog customerLog = null;
+        StaffAccount staffAccount = null;
         try {
             customer = customerManager.findCustomer(userName, passWord); // use function to check exist
         } catch (Exception ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            staffAccount = staffDBManager.findStaff(userName, passWord);
+        } catch (Exception e) { 
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, e);
+
         }
         if (!validator.userNameValidate(userName)) {
             session.setAttribute("errorMsg", "*Your user name imput not valid");//RegEX
@@ -63,6 +74,9 @@ public class LoginServlet extends HttpServlet{
             session.setAttribute("customer", customer);// if customer find set session for customer
             //request.getRequestDispatcher("ProductServlet").include(request, response);
             response.sendRedirect("ProductServlet");
+        }else if(staffAccount != null){
+            session.setAttribute("staff", staffAccount);
+            request.getRequestDispatcher("staffWelcome.jsp").include(request, response);
         }else {
             session.setAttribute("errorMsg", "*Password or username incorrect");
             request.getRequestDispatcher("login.jsp").include(request, response);

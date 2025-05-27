@@ -1,12 +1,12 @@
 <html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="model.Customer"%>
-<%@ page import="model.CustomerLog"%>
+<%@ page import="model.StaffAccount"%>
+<%@ page import="model.StaffAccessLog"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 
 <% ArrayList<String[]> historyLog = (ArrayList<String[]>) session.getAttribute("historyLog"); %>
 <%@ page import="java.util.ArrayList" %>
-<% Customer customer = (Customer) session.getAttribute("customer"); %>
+<% StaffAccount staff = (StaffAccount) session.getAttribute("staff"); %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -211,11 +211,11 @@
             <div class="account">
             <div class="account-body">
                 <div class="account-header"><h2>Account Information</h2> <hr style="width: 550px;"/></div>
-                <div class="info"><p>Username</p> <div class="info-box"><%= customer.getUserName()%></div></div>
-                <div class="info"><p>Name</p> <div class="info-box"><%= customer.getName()%></div></div>
-                <div class="info"><p>Gmail</p><div class="info-box"><%= customer.getGmail()%></div></div>
-                <div class="info"><p>Phone</p><div class="info-box"><%= customer.getPhone() %></div></div>
-                <div class="info"><p>Gender</p><div class="info-box"><%= customer.getGender()%></div></div>
+                <div class="info"><p>Username</p> <div class="info-box"><%= staff.getUserName()%></div></div>
+                <div class="info"><p>Name</p> <div class="info-box"><%= staff.getName()%></div></div>
+                <div class="info"><p>Gmail</p><div class="info-box"><%= staff.getGmail()%></div></div>
+                <div class="info"><p>Phone</p><div class="info-box"><%= staff.getPhone() %></div></div>
+                <div class="info"><p>Gender</p><div class="info-box"><%= staff.getGender()%></div></div>
                     <div class="account-edit"><a href="remove.jsp"class="remove">Remove</a>
                     <a href="updateAccount.jsp" class="change">Update information</a></div>
                 </div>

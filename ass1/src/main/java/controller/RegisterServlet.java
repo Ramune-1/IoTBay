@@ -22,6 +22,7 @@ import jakarta.servlet.http.HttpSession;
 
 import model.Customer;
 import model.dao.CustomerDBManager;
+import model.dao.StaffDBManager;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet{
@@ -40,7 +41,7 @@ public class RegisterServlet extends HttpServlet{
          boolean existUserName = false;// variable to check whether username isvalid
          boolean existGmail = false;
          boolean existPhone = false;
-        
+          StaffDBManager staffDBManager = (StaffDBManager) session.getAttribute("staffManager");
          CustomerDBManager customerManager = (CustomerDBManager) session.getAttribute("customerManager");
          if (customerManager == null) throw new IOException("Manager not found");// use valid find each and print different error
         Customer customer = null;
@@ -49,7 +50,9 @@ public class RegisterServlet extends HttpServlet{
 
         try {// check username
           existUserName = customerManager.checkExistUsername(userName);
-         
+            if (!existUserName) {
+                existUserName = staffDBManager.checkExistUsername(userName);
+            }
         } catch (Exception ex) {
          Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -57,12 +60,18 @@ public class RegisterServlet extends HttpServlet{
          
         try {
             existGmail = customerManager.checkExistGmail(gmail);
+            if (!existGmail) {
+                existGmail = staffDBManager.checkExistGmail(gmail);
+            }
         } catch (Exception ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);         
        
         }
         try {
             existPhone = customerManager.checkExistPhone(phone);
+            if (!existPhone) {
+                existPhone = staffDBManager.checkExistPhone(phone);
+            }
         }catch (Exception ex){
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

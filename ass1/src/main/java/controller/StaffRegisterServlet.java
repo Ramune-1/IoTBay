@@ -21,6 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.StaffAccount;
+import model.dao.CustomerDBManager;
 import model.dao.StaffDBManager;
 
 @WebServlet("/StaffRegisterServlet")
@@ -40,7 +41,7 @@ public class StaffRegisterServlet extends HttpServlet{
          boolean existUserName = false;// variable to check whether username isvalid
          boolean existGmail = false;
          boolean existPhone = false;
-        
+        CustomerDBManager customerDBManager = (CustomerDBManager) session.getAttribute("customerManager");
          StaffDBManager staffDBManager = (StaffDBManager) session.getAttribute("staffManager");
          if (staffDBManager == null) throw new IOException("StaffManager not found");// use valid find each and print different error
         StaffAccount staff = null;
@@ -49,7 +50,9 @@ public class StaffRegisterServlet extends HttpServlet{
 
         try {// check username
           existUserName = staffDBManager.checkExistUsername(userName);
-         
+          if (!existUserName) {
+            existUserName = customerDBManager.checkExistUsername(userName);
+          }
         } catch (Exception ex) {
          Logger.getLogger(StaffRegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -57,12 +60,18 @@ public class StaffRegisterServlet extends HttpServlet{
          
         try {
             existGmail = staffDBManager.checkExistGmail(gmail);
+            if (!existGmail) {
+            existGmail = customerDBManager.checkExistGmail(userName);
+          }
         } catch (Exception ex) {
             Logger.getLogger(StaffRegisterServlet.class.getName()).log(Level.SEVERE, null, ex);         
        
         }
         try {
             existPhone = staffDBManager.checkExistPhone(phone);
+            if (!existPhone) {
+            existPhone = customerDBManager.checkExistPhone(phone);
+          }
         }catch (Exception ex){
             Logger.getLogger(StaffRegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
