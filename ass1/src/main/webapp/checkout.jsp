@@ -28,12 +28,13 @@
             </tr>
 
             <%
+            double subtotal = 0.0;
                 for(CartItem item : cart.getItems()){
                     Product product = item.getProduct();
                     int quantity = item.getQuantity();
                     double price = product.getPrice();
-                    double subtotal = price * quantity;
-                            total += subtotal;
+                     subtotal += price * quantity;
+                            
 
                  
             %>
@@ -48,10 +49,60 @@
 
             <%}%>
 
+            
+
+            
+
             <tr >
                 <td colspan="2" style="text-align: right;">Total:</td>
                 <td > <%= String.format("%.2f", subtotal) %></td>
             </tr>
+
+
+
+            <%
+            
+            String isSubmitted = request.getParameter("issubmitted");
+            String paymentop= request.getParameter("paymentop");
+
+            if (isSubmitted != null && isSubmitted.equals("true")){
+
+
+                
+
+
+            
+            
+            
+            
+            %>
+
+            <form action="/PaymentServlet" method="post">
+                <p>Please enter you details for your <%= paymentop %> </p>
+
+
+
+
+            </form>
+
+
+
+
+            
+           <form action="checkout.jsp">
+            <table>
+                <p>please choose your payment method below : </p>
+                <tr><td>Paypal <input type="radio" name="paymentop" value="PAYPAL" ></td></tr>
+                <tr><td>Credit Card<input type="radio" name="paymentop" value="CREDITCARD"></td></tr>
+                <tr><td>Apple Pay <input type="radio" name="paymentop" value="APPLEPAY"> </td></tr>
+                <tr><td>Debit Card  <input type="radio" name="paymentop" value="DEBITCARD"> </td></tr>
+
+                
+            </table>
+
+            <input class="button" type="submit" value="select payment">
+            <input type="hidden" name="issubmitted" value="true">
+           </form>
 
             
 
