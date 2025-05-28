@@ -5,16 +5,16 @@ public class StaffAccount {
     private String userName;
     private String name;
     private String gender;
-    private String email;
+    private String gmail;
     private String password;
     private String phone;
 
-    public StaffAccount(String staffID, String userName, String name, String email, String password, String phone, String gender) {
+    public StaffAccount(String staffID, String userName, String name, String gmail, String password, String phone, String gender) {
         this.staffID = staffID;
         this.userName = userName;
         this.name = name;
         this.gender = gender;
-        this.email = email;
+        this.gmail = gmail;
         this.password = password;
         this.phone = phone;
     }
@@ -51,12 +51,12 @@ public class StaffAccount {
         this.gender = gender;
     }
 
-    public String getEmail() {
-        return this.email;
+    public String getGmail() {
+        return this.gmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
     }
 
     public String getPassword() {

@@ -3,9 +3,10 @@
 <%@ page import="model.Customer"%>
 <%@ page import="model.CustomerLog"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<% Customer customer = (Customer) session.getAttribute("customer");%>
-<% ArrayList<CustomerLog> customerLogs = (ArrayList<CustomerLog>) session.getAttribute("customerLogs"); %>
+
+<% ArrayList<String[]> historyLog = (ArrayList<String[]>) session.getAttribute("historyLog"); %>
 <%@ page import="java.util.ArrayList" %>
+<% Customer customer = (Customer) session.getAttribute("customer"); %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
         }
         body{
             font-family: Arial, Helvetica, sans-serif ;
+            background-color: rgb(17, 125, 139);
         }
         .body {
             display: flex;
@@ -28,25 +30,58 @@
             font-family: Arial, Helvetica, sans-serif;
             flex-direction: column;
         }
-        .header{
+     .header {
             height: 60px;
             background-color: white;
             width: 100%;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             padding-left: 70px;
-            
+            font-family: Arial, Helvetica, sans-serif;
         }
-        .logo{
+        .left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .logo {
             font-size: 30px;
-            font-weight: bolder;
-            color: rgb(17, 125, 139) ;
+            font-weight: bold;
+            color: rgb(17, 125, 139);
         }
-        .topic{
+        .topic {
             font-size: 25px;
-            font-weight: 500px;
+            font-weight: 500;
             margin-left: 10px;
+        }
+        .right {
+            margin-right: 20px;
+            color: rgb(17, 125, 139);
+            font-weight: bold;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .right a {
+            color: rgb(17, 125, 139);
+            text-decoration: none;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-weight: bold;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .right a:hover{
+            background-color: rgb(235, 232, 232);
+             color: rgb(9, 66, 73);
+            height: 60px;
+        }
+        .right .current
+        {
+            background-color: rgb(17, 125, 139);
+            color: white;
         }
         .container{
             margin-top: -10px;
@@ -100,25 +135,24 @@
             align-content: center;
             padding-left: 5px;
         }
-        .change{
-            background-color: rgb(17, 125, 139);
-            width: 100px;
-            height: 30px;
-            margin-left: 450px;
-            font-size: 10px;
-            text-decoration: none;
-            align-content: center;
-            padding-left: 6px;
-            border-radius: 10px;
-            color: white;
-            border-color: black;
-            border-width: 2px;
-            border-style: solid;
-        }
-        .change:hover{
-            background-color: rgb(142, 190, 197);
-            color: black;
-        }
+         .change {
+      background-color: rgb(17, 125, 139);
+      width: 100px;
+      height: 30px;
+   
+      font-size: 10px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      color: white;
+      border: 2px solid black;
+    }
+    .change:hover {
+      background-color: rgb(142, 190, 197);
+      color: black;
+    }
         table{
             border-collapse: collapse;
             margin-top: 50px;
@@ -134,13 +168,44 @@
             text-align: center;
             font-size: 15px;
         }
+           .account-edit{
+      display: flex;
+      justify-content: space-between;
+    }
+        .remove {
+      background-color: rgb(196, 196, 196);
+      width: 100px;
+      height: 30px;
+   
+      font-size: 10px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      color: black;
+      border: 2px solid black;
+    }
+    .remove:hover {
+      background-color: rgb(80, 80, 80);
+      color: rgb(255, 255, 255);
+    }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">Iotbay</div>
-        <div class="topic">Account</div>
+       <div class="header">
+        <div class="left">
+            <div class="logo">Iotbay</div>
+            <div class="topic">Account</div>
+        </div>
+        <div class="right">
+            <a href="productList.jsp">Shopping</a>
+            <a href="">Cart</a>
+            <a href="" class="current">Account</a> 
+            <a href="LogoutServlet">Logout</a>
+        </div>
     </div>
+
     <div class="body">
         <div class="container">
             <div class="account">
@@ -149,9 +214,10 @@
                 <div class="info"><p>Username</p> <div class="info-box"><%= customer.getUserName()%></div></div>
                 <div class="info"><p>Name</p> <div class="info-box"><%= customer.getName()%></div></div>
                 <div class="info"><p>Gmail</p><div class="info-box"><%= customer.getGmail()%></div></div>
-                <div class="info"><p>Password</p><div class="info-box"><%= customer.getPassWord() %></div></div>
+                <div class="info"><p>Phone</p><div class="info-box"><%= customer.getPhone() %></div></div>
                 <div class="info"><p>Gender</p><div class="info-box"><%= customer.getGender()%></div></div>
-                    <a href="updateAccount.jsp" class="change">Update information</a>
+                    <div class="account-edit"><a href="remove.jsp"class="remove">Remove</a>
+                    <a href="updateAccount.jsp" class="change">Update information</a></div>
                 </div>
             </div>
             <div class="log-history">
@@ -160,14 +226,13 @@
                    
             <table>
                 <tr>
-                    <th>Login Time</th>
-                    <th>Logout Time</th>
+                    <th>Login Time(UTC)</th>
+                    <th>Logout Time(UTC)</th>
                 </tr>
-                <% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-                for (int i = 0 ; i < customerLogs.size(); i++){
-                    String loginTime = sdf.format(customerLogs.get(i).getLoginTime());
-                    String logoutTime = (customerLogs.get(i).getLogoutTime() != null ) ? sdf.format(customerLogs.get(i).getLogoutTime()) : "-";        
-                 %>
+                <% 
+                for (String[] log: historyLog){
+                    String loginTime = log[0];
+                    String logoutTime = log[1]; %>
                 <tr>
                     <td><%=loginTime%></td>
                     <td><%=logoutTime%></td>

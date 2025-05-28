@@ -93,7 +93,7 @@
         .error{
             color: red;
             align-self: flex-start;
-            margin-left: 25px;
+            
         }
     </style>
 </head>

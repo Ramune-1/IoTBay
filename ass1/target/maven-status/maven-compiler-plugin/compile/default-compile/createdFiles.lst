@@ -5,6 +5,7 @@ controller\CartServlet.class
 controller\UpdateAccountServlet.class
 model\Cart.class
 model\dao\DBConnector.class
+model\StaffAccessLog.class
 model\dao\CustomerDBManager.class
 controller\AccountViewServlet.class
 controller\StaffRegisterServlet.class
@@ -17,7 +18,9 @@ model\PaymentMethod.class
 model\Product.class
 controller\PaymentServlet.class
 model\dao\ProductDBManager.class
+model\dao\StaffAccessLogDBManager.class
 model\Customer.class
+controller\RemoveServlet.class
 model\Inventory.class
 controller\LoginServlet.class
 model\dao\CustomerAccessLogDBManager.class
@@ -33,7 +36,9 @@ model\Order.class
 controller\AddToCartServlet.class
 model\Delivery.class
 model\CustomerLog.class
+controller\UpdateStaffServlet.class
 model\dao\StaffDBManager.class
+controller\LogoutServlet.class
 model\Delivery$Status.class
 model\dao\PaymentMethodDBManager.class
 controller\RegisterServlet.class

@@ -21,6 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.StaffAccount;
+import model.dao.CustomerDBManager;
 import model.dao.StaffDBManager;
 
 @WebServlet("/StaffRegisterServlet")
@@ -40,31 +41,39 @@ public class StaffRegisterServlet extends HttpServlet{
          boolean existUserName = false;// variable to check whether username isvalid
          boolean existGmail = false;
          boolean existPhone = false;
-        
+        CustomerDBManager customerDBManager = (CustomerDBManager) session.getAttribute("customerManager");
          StaffDBManager staffDBManager = (StaffDBManager) session.getAttribute("staffManager");
-         if (staffDBManager == null) throw new IOException("Manager not found");// use valid find each and print different error
+         if (staffDBManager == null) throw new IOException("StaffManager not found");// use valid find each and print different error
         StaffAccount staff = null;
         
 
 
         try {// check username
           existUserName = staffDBManager.checkExistUsername(userName);
-         
+          if (!existUserName) {
+            existUserName = customerDBManager.checkExistUsername(userName);
+          }
         } catch (Exception ex) {
-         Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(StaffRegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
 
         }
          
         try {
             existGmail = staffDBManager.checkExistGmail(gmail);
+            if (!existGmail) {
+            existGmail = customerDBManager.checkExistGmail(userName);
+          }
         } catch (Exception ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);         
+            Logger.getLogger(StaffRegisterServlet.class.getName()).log(Level.SEVERE, null, ex);         
        
         }
         try {
             existPhone = staffDBManager.checkExistPhone(phone);
+            if (!existPhone) {
+            existPhone = customerDBManager.checkExistPhone(phone);
+          }
         }catch (Exception ex){
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StaffRegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (existGmail == false && existUserName == false && existPhone == false) {
@@ -72,30 +81,30 @@ public class StaffRegisterServlet extends HttpServlet{
                 staffDBManager.addStaff(staffID, userName, name, gmail, passWord, phone, gender);
                 staff = staffDBManager.findStaff(userName, passWord);
             } catch (Exception ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(StaffRegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
                
                 
             }
         }
          if (existUserName) {
-            session.setAttribute("staffErrorMsg", "This user name exist");
+            session.setAttribute("staffErrorMsg", "*This user name exist");
             request.getRequestDispatcher("staffRegister.jsp").include(request, response);
         } else if (existGmail) {
-            session.setAttribute("staffErrorMsg", "This gmail exist");
+            session.setAttribute("staffErrorMsg", "*This gmail exist");
             request.getRequestDispatcher("staffRegister.jsp").include(request, response);
         } else if (!validator.gmailValidate(gmail)){
-            session.setAttribute("staffErrorMsg", "gmail in valid");
+            session.setAttribute("staffErrorMsg", "*Gmail invalid");
             request.getRequestDispatcher("staffRegister.jsp").include(request, response);
         } else if (!validator.userNameValidate(userName)) {
-            session.setAttribute("staffErrorMsg", "username  in valid");
+            session.setAttribute("staffErrorMsg", "*Username invalid");
             request.getRequestDispatcher("staffRegister.jsp").include(request, response);
         } else if (!validator.passwordValidate(passWord)) {
-            session.setAttribute("staffErrorMsg", "password in valid");
+            session.setAttribute("staffErrorMsg", "*Password invalid");
             request.getRequestDispatcher("staffRegister.jsp").include(request, response);
         } else if (staff != null){
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else if (staff == null){
-            session.setAttribute("staffErrorMsg", "IT's error");
+            session.setAttribute("staffErrorMsg", "*IT's error");
             request.getRequestDispatcher("staffRegister.jsp").include(request, response);
         }
 

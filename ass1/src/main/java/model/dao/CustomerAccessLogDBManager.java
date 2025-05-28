@@ -14,41 +14,46 @@ public class CustomerAccessLogDBManager {
         this.conn = conn;
     }
 
-    public void addLog(String customerID, String username) throws SQLException
+    public void addLog(String logID ,String customerID, String username) throws SQLException
     {
-        PreparedStatement ps = conn.prepareStatement("INSERT INTO CustomerAccessLog VALUES (?,?,CURRENT_TIMESTAMP, null)");
-        ps.setString(1, customerID);
-        ps.setString(2, username);
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO CustomerAccessLog VALUES (?,?,?,CURRENT_TIMESTAMP, null)");
+        ps.setString(1, logID);
+        ps.setString(2, customerID);
+        ps.setString(3, username);
         ps.executeUpdate();
 }
-    public boolean findCustomerLog(String username) throws SQLException{
-        PreparedStatement ps = conn.prepareStatement("SELECT USERNAME FROM CustomerAccessLog WHERE USERNAME=?");
-        ps.setString(1, username);
+    public CustomerLog findCustomerLog(String customerID) throws SQLException{
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM CustomerAccessLog WHERE CUSTOMERID=? ORDER BY LOGINTIME DESC LIMIT 1");
+        ps.setString(1, customerID);
         ResultSet rs =ps.executeQuery();
         if (rs.next()) {
-            return true;
+            String logID = rs.getString("logid");
+           String username = rs.getString("username");
+           Timestamp loginTime = rs.getTimestamp("logintime");
+           Timestamp logoutTime = rs.getTimestamp("logouttime");
+           return new CustomerLog(logID,customerID, username, loginTime, logoutTime);
         }
-        return false;
+        return null;// recheck
     }
-    public void updateCustomerLogin(String username) throws SQLException{
-        PreparedStatement ps = conn.prepareStatement("UPDATE CustomerAccessLog SET LOGINTIME=CURRENT_TIMESTAMP");
-        ps.executeUpdate();
-    }
-    public void updateCustomerLogout(String username) throws SQLException{
-        PreparedStatement ps = conn.prepareStatement("UPDATE CustomerAccessLog SET LOGOUTIME=CURRENT_TIMESTAMP");
+  
+    public void updateCustomerLogout(String customerID,String logID) throws SQLException{
+        PreparedStatement ps = conn.prepareStatement("UPDATE CustomerAccessLog SET LOGOUTTIME=CURRENT_TIMESTAMP WHERE CUSTOMERID=? AND LOGID=? ");
+        ps.setString(1, customerID);
+        ps.setString(2, logID);
         ps.executeUpdate();
     }
 
-    public ArrayList<CustomerLog> findAllLog(String username) throws SQLException{
+    public ArrayList<CustomerLog> findAllLog(String customerID) throws SQLException{
         ArrayList<CustomerLog> customerLogs = new ArrayList<>();
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM CustomerAccessLog WHERE USERNAME=? ORDER BY LOGINTIME DESC LIMIT 5");
-        ps.setString(1, username);
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM CustomerAccessLog WHERE CUSTOMERID=? ORDER BY LOGINTIME DESC LIMIT 5");
+        ps.setString(1, customerID);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            String customerID = rs.getString("customerID");
+            String logID = rs.getString("logID");
+            String username = rs.getString("username");
             Timestamp loginTime = rs.getTimestamp("logintime");
             Timestamp logoutTime =  rs.getTimestamp("logouttime");
-            CustomerLog customerLog = new CustomerLog(customerID, username, loginTime, logoutTime);
+            CustomerLog customerLog = new CustomerLog(logID, customerID, username, loginTime, logoutTime);
             customerLogs.add(customerLog);
         }
         return customerLogs;
