@@ -20,7 +20,7 @@
 
         <form class="search-form" action="shipment" method="get">
             <input type="hidden" name="action" value="search">
-            <label>Shipment ID: <input type="text" name="id" placeholder="e.g., 1"></label>
+            <label>Shipment ID: <input type="text" name="id" placeholder="e.g., UUID string"></label>
             <label>Date: <input type="date" name="date"></label>
             <label>Order ID: <input type="text" name="orderId"></label>
             <button type="submit">Search</button>
@@ -45,7 +45,7 @@
                     for (Shipment s : shipments) {
             %>
             <tr>
-                <td><%= s.getId() %></td>
+                <td><%= s.getShipmentId() %></td>
                 <td><%= s.getOrderId() %></td>
                 <td><%= s.getCustomerId() %></td>
                 <td><%= s.getAddress() %></td>
@@ -59,8 +59,8 @@
                 </td>
                 <td>
                     <% if (!s.getStatus().equalsIgnoreCase("Finalised")) { %>
-                        <a href="shipment?action=edit&id=<%= s.getId() %>">Edit</a> |
-                        <a href="shipment?action=delete&id=<%= s.getId() %>" onclick="return confirm('Are you sure you want to delete this shipment?');">Delete</a>
+                        <a href="shipment?action=edit&id=<%= s.getShipmentId() %>">Edit</a> |
+                        <a href="shipment?action=delete&id=<%= s.getShipmentId() %>" onclick="return confirm('Are you sure you want to delete this shipment?');">Delete</a>
                     <% } else { %>
                         <span style="color:gray;">Locked</span>
                     <% } %>

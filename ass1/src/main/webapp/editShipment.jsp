@@ -19,7 +19,7 @@
 
         <form action="shipment" method="post">
             <input type="hidden" name="action" value="update">
-            <input type="hidden" name="shipmentId" value="<%= shipment.getId() %>">
+            <input type="hidden" name="shipmentId" value="<%= shipment.getShipmentId() %>">
 
             <label>Order ID:</label>
             <input type="text" name="orderId" value="<%= shipment.getOrderId() %>" required><br>
