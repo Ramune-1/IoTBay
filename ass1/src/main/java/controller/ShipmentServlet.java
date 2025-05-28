@@ -24,39 +24,6 @@ public class ShipmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();  // ✅ Needed first
-        Customer customer = (Customer) session.getAttribute("customer");
-        if (customer == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        String customerId = customer.getCustomerID();
-        String action = request.getParameter("action");  // ✅ Also needed
-
-        String orderId = request.getParameter("orderId");
-        String address = request.getParameter("address");
-        String shipmentDate = request.getParameter("shipmentDate");
-        String method = request.getParameter("method");
-        String status = request.getParameter("status");
-
-        if ("update".equalsIgnoreCase(action)) {
-            int shipmentId = Integer.parseInt(request.getParameter("shipmentId"));
-            Shipment updatedShipment = new Shipment(shipmentId, orderId, customerId, address, shipmentDate, method, status);
-            shipmentDAO.updateShipment(updatedShipment);
-        } else {
-            Shipment shipment = new Shipment(0, orderId, customerId, address, shipmentDate, method, status);
-            shipmentDAO.insertShipment(shipment);
-        }
-
-        response.sendRedirect("shipment?action=list");
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String action = request.getParameter("action");
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("customer");
         if (customer == null) {
@@ -65,48 +32,75 @@ public class ShipmentServlet extends HttpServlet {
         }
 
         String customerId = customer.getCustomerID();
+        String action = request.getParameter("action");
 
+        String shipmentId = request.getParameter("shipmentId"); // Now String
+        String orderId = request.getParameter("orderId");
+        String address = request.getParameter("address");
+        String shipmentDate = request.getParameter("shipmentDate");
+        String method = request.getParameter("method");
+        String status = request.getParameter("status");
 
+        if ("update".equalsIgnoreCase(action)) {
+            Shipment updatedShipment = new Shipment(shipmentId, orderId, customerId, address, shipmentDate, method, status);
+            shipmentDAO.updateShipment(updatedShipment);
+        } else {
+            // generate unique ID (you can use UUID)
+            String newShipmentId = java.util.UUID.randomUUID().toString();
+            Shipment shipment = new Shipment(newShipmentId, orderId, customerId, address, shipmentDate, method, status);
+            shipmentDAO.insertShipment(shipment);
+        }
+
+        response.sendRedirect("thankYou.jsp"); // redirect after successful submission
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
         if (action == null) action = "";
+
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+
+        // Allow viewbycustomer to bypass login
+        if (!"viewbycustomer".equalsIgnoreCase(action) && customer == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        String customerId = (customer != null) ? customer.getCustomerID() : null;
 
         switch (action.toLowerCase()) {
             case "list":
                 List<Shipment> shipments = shipmentDAO.getAllShipment(customerId);
                 request.setAttribute("shipments", shipments);
-                request.getRequestDispatcher("list.jsp").forward(request, response);
+                request.getRequestDispatcher("listShipment.jsp").forward(request, response);
                 break;
 
             case "edit":
-                try {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    Shipment s = shipmentDAO.getShipmentById(id);
-                    if (s != null && s.getCustomerId().equals(customerId)) {
-                        if (s.getStatus().equalsIgnoreCase("Finalised")) {
-                            response.sendRedirect("shipment?action=list"); // block edit
-                            return;
-                        }
-                        request.setAttribute("shipment", s);
-                        request.getRequestDispatcher("editShipment.jsp").forward(request, response);
-                    } else {
+                String idToEdit = request.getParameter("id");
+                Shipment s = shipmentDAO.getShipmentById(idToEdit);
+                if (s != null && s.getCustomerId().equals(customerId)) {
+                    if (s.getStatus().equalsIgnoreCase("Finalised")) {
                         response.sendRedirect("shipment?action=list");
+                        return;
                     }
-                } catch (NumberFormatException e) {
+                    request.setAttribute("shipment", s);
+                    request.getRequestDispatcher("editShipment.jsp").forward(request, response);
+                } else {
                     response.sendRedirect("shipment?action=list");
                 }
                 break;
 
             case "delete":
-                try {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    Shipment s = shipmentDAO.getShipmentById(id);
-                    if (s != null && s.getCustomerId().equals(customerId)) {
-                        if (!s.getStatus().equalsIgnoreCase("Finalised")) {
-                            shipmentDAO.deleteShipment(id);
-                        }
+                String idToDelete = request.getParameter("id");
+                Shipment d = shipmentDAO.getShipmentById(idToDelete);
+                if (d != null && d.getCustomerId().equals(customerId)) {
+                    if (!d.getStatus().equalsIgnoreCase("Finalised")) {
+                        shipmentDAO.deleteShipment(idToDelete);
                     }
-
-                } catch (NumberFormatException e) {
-                    // ignore
                 }
                 response.sendRedirect("shipment?action=list");
                 break;
@@ -114,18 +108,24 @@ public class ShipmentServlet extends HttpServlet {
             case "search":
                 String idStr = request.getParameter("id");
                 String date = request.getParameter("date");
-                Integer id = null;
-                try {
-                    if (idStr != null && !idStr.isEmpty()) {
-                        id = Integer.parseInt(idStr);
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("[WARN] Invalid shipment ID format.");
+                String orderId = request.getParameter("orderId");
+
+                List<Shipment> searchResults = shipmentDAO.searchShipment(customerId, idStr, date, orderId);
+                request.setAttribute("shipments", searchResults);
+                request.getRequestDispatcher("listShipment.jsp").forward(request, response);
+                break;
+
+            case "viewbycustomer":
+                String queryCustomerId = request.getParameter("customerId");
+                if (queryCustomerId == null || queryCustomerId.trim().isEmpty()) {
+                    request.setAttribute("error", "Customer ID cannot be empty.");
+                    request.getRequestDispatcher("viewMyShipments.jsp").forward(request, response);
+                    return;
                 }
 
-                List<Shipment> searchResults = shipmentDAO.searchShipment(customerId, id, date);
-                request.setAttribute("shipments", searchResults);
-                request.getRequestDispatcher("list.jsp").forward(request, response);
+                List<Shipment> foundShipments = shipmentDAO.getAllShipment(queryCustomerId);
+                request.setAttribute("shipments", foundShipments);
+                request.getRequestDispatcher("viewMyShipments.jsp").forward(request, response);
                 break;
 
             default:
