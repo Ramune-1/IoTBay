@@ -20,11 +20,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.Customer;
-import model.CustomerLog;
-import model.StaffAccessLog;
+
 import model.StaffAccount;
 import model.dao.CustomerDBManager;
-import model.dao.StaffAccessLogDBManager;
+
 import model.dao.StaffDBManager;
 
 @WebServlet("/RemoveServlet")

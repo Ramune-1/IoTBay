@@ -3,7 +3,7 @@ package controller;
 import controller.utility.Validator;
 import java.io.IOException;
 
-import java.sql.SQLException;
+
 import java.util.UUID;
 import java.util.logging.Level;
 
