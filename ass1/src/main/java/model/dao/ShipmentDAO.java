@@ -54,15 +54,7 @@ public class ShipmentDAO {
             stmt.setString(1, customerId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                list.add(new Shipment(
-                        rs.getString("shipmentId"),
-                        rs.getString("ORDERID"),
-                        rs.getString("CUSTOMERID"),
-                        rs.getString("address"),
-                        rs.getString("shipmentDate"),
-                        rs.getString("method"),
-                        rs.getString("status")
-                ));
+                list.add(extractShipment(rs));
             }
         } catch (SQLException e) {
             System.out.println("[ERROR] Failed to fetch shipments:");
@@ -77,15 +69,7 @@ public class ShipmentDAO {
             stmt.setString(1, shipmentId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new Shipment(
-                        rs.getString("shipmentId"),
-                        rs.getString("ORDERID"),
-                        rs.getString("CUSTOMERID"),
-                        rs.getString("address"),
-                        rs.getString("shipmentDate"),
-                        rs.getString("method"),
-                        rs.getString("status")
-                );
+                return extractShipment(rs);
             }
         } catch (SQLException e) {
             System.out.println("[ERROR] Failed to fetch shipment by ID:");
@@ -120,15 +104,7 @@ public class ShipmentDAO {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                results.add(new Shipment(
-                        rs.getString("shipmentId"),
-                        rs.getString("ORDERID"),
-                        rs.getString("CUSTOMERID"),
-                        rs.getString("address"),
-                        rs.getString("shipmentDate"),
-                        rs.getString("method"),
-                        rs.getString("status")
-                ));
+                results.add(extractShipment(rs));
             }
 
         } catch (SQLException e) {
@@ -137,6 +113,22 @@ public class ShipmentDAO {
         }
 
         return results;
+    }
+
+    public List<Shipment> getShipmentsByCustomerId(String customerId) {
+        List<Shipment> list = new ArrayList<>();
+        String sql = "SELECT * FROM Shipment WHERE CUSTOMERID = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, customerId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                list.add(extractShipment(rs));
+            }
+        } catch (SQLException e) {
+            System.out.println("[ERROR] Failed to get shipments by CustomerID:");
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public List<String> getProductDetailsForShipment(String orderId) {
@@ -206,5 +198,18 @@ public class ShipmentDAO {
             System.out.println("[ERROR] Failed to delete Shipment:");
             e.printStackTrace();
         }
+    }
+
+    // Helper method
+    private Shipment extractShipment(ResultSet rs) throws SQLException {
+        return new Shipment(
+                rs.getString("shipmentId"),
+                rs.getString("ORDERID"),
+                rs.getString("CUSTOMERID"),
+                rs.getString("address"),
+                rs.getString("shipmentDate"),
+                rs.getString("method"),
+                rs.getString("status")
+        );
     }
 }
